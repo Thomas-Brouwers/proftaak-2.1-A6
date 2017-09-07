@@ -5,22 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using proftaak_2._1;
 
 
 namespace proftaak_2._1
 {
-    class SerialPortProgram
+    class SerialPortProgram : Ergometer, ISimulator
     {
-        private SerialPort serialPort = new SerialPort("COM3", 9600, Parity.None);
-        static void Main(string[] args)
-        {
-            new SerialPortProgram();
-        }
+        private SerialPort serialPort;
+        //static void Main(string[] args)
+        //{
+        //    new SerialPortProgram();
+        //}
 
 
-        private SerialPortProgram()
+        public SerialPortProgram(String port)
         {
+            serialPort = new SerialPort(port, 9600, Parity.None);
             Boolean on = true;
             Console.WriteLine("Incoming Data");
             serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataRecieved);
