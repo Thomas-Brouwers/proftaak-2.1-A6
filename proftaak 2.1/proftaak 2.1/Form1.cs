@@ -40,12 +40,6 @@ namespace proftaak_2._1
             actualPowerValue.Text = data[7];
         }
 
-        private void updateButton_Click(object sender, EventArgs e)
-        {
-            data = spp.update();
-            update();
-        }
-
         private void TimerEventProcessor(Object myObject,
                                             EventArgs myEventArgs)
         {

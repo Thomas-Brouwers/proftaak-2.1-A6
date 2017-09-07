@@ -44,7 +44,6 @@
             this.requestedPowerValue = new System.Windows.Forms.Label();
             this.actualPower = new System.Windows.Forms.Label();
             this.actualPowerValue = new System.Windows.Forms.Label();
-            this.updateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // speed
@@ -191,20 +190,9 @@
             this.actualPowerValue.TabIndex = 15;
             this.actualPowerValue.Text = "actualPowerValue";
             // 
-            // updateButton
-            // 
-            this.updateButton.Location = new System.Drawing.Point(119, 234);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(83, 23);
-            this.updateButton.TabIndex = 16;
-            this.updateButton.Text = "updateButton";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
-            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(315, 278);
-            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.actualPowerValue);
             this.Controls.Add(this.actualPower);
             this.Controls.Add(this.requestedPowerValue);
@@ -246,6 +234,6 @@
         private System.Windows.Forms.Label requestedPowerValue;
         private System.Windows.Forms.Label actualPower;
         private System.Windows.Forms.Label actualPowerValue;
-        private System.Windows.Forms.Button updateButton;
+
     }
 }
