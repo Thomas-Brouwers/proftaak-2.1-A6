@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace proftaak_2._1
 {
-    interface ISimulator
+    public interface ISimulator
     {
 
     }

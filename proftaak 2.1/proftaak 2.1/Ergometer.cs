@@ -7,7 +7,7 @@ using proftaak_2._1;
 
 namespace proftaak_2._1
 {
-    abstract class Ergometer : ISimulator
+    public abstract class Ergometer : ISimulator
     {
         public static ISimulator Create(String port) {
             if (port == "simulator")
