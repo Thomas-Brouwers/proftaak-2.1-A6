@@ -16,17 +16,30 @@ namespace proftaak_2._1
         String[] data;
         SerialPortProgram spp;
         FakeData fd;
+        bool simulator;
 
-        public Form1(String port, SerialPortProgram spp, FakeData fd)
+        public Form1(SerialPortProgram spp)
         {
             this.spp = spp;
-            this.fd = fd;
+            simulator = false;
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(TimerEventProcessor);
             timer.Interval = 500;
             InitializeComponent();
             timer.Start();
             
+        }
+
+        public Form1(FakeData fd)
+        {
+            this.fd = fd;
+            simulator = true;
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Tick += new EventHandler(TimerEventProcessor);
+            timer.Interval = 500;
+            InitializeComponent();
+            timer.Start();
+
         }
 
         private void update()
@@ -45,12 +58,12 @@ namespace proftaak_2._1
         private void TimerEventProcessor(Object myObject,
                                             EventArgs myEventArgs)
         {
-            if (fd == null)
-            {
-                data = spp.update();
-            } else
+            if (simulator)
             {
                 data = fd.update();
+            } else
+            {
+                data = spp.update();
             }
             update();
         }
