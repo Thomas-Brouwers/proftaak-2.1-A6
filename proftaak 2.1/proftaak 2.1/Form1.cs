@@ -24,7 +24,7 @@ namespace proftaak_2._1
             simulator = false;
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(TimerEventProcessor);
-            timer.Interval = 500;
+            timer.Interval = 1000;
             InitializeComponent();
             timer.Start();
             
@@ -44,15 +44,17 @@ namespace proftaak_2._1
 
         private void update()
         {
-
-            pulseValue.Text = data[0];
-            rpmValue.Text = data[1];
-            speedValue.Text = data[2];
-            distanceValue.Text = data[3];
-            requestedPowerValue.Text = data[4];
-            energyValue.Text = data[5];
-            elapsedTimeValue.Text = data[6];
-            actualPowerValue.Text = data[7];
+            if (data.Length == 8)
+            {
+                pulseValue.Text = data[0];
+                rpmValue.Text = data[1];
+                speedValue.Text = data[2];
+                distanceValue.Text = data[3];
+                requestedPowerValue.Text = data[4];
+                energyValue.Text = data[5];
+                elapsedTimeValue.Text = data[6];
+                actualPowerValue.Text = data[7];
+            }
         }
 
         private void TimerEventProcessor(Object myObject,
