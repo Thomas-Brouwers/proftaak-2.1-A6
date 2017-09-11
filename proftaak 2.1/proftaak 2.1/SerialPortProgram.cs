@@ -22,10 +22,11 @@ namespace proftaak_2._1
         public SerialPortProgram(String port)
         {
             serialPort = new SerialPort(port, 9600, Parity.None);
-            Application.Run(new Form1(this));
+            
             Console.WriteLine("Incoming Data");
             serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataRecieved);
             serialPort.Open();
+            Application.Run(new Form1(this));
         }
 
         private void serialPort_DataRecieved(object sender, SerialDataReceivedEventArgs e)
