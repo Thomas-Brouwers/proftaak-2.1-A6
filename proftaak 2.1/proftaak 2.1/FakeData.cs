@@ -26,7 +26,7 @@ namespace proftaak_2._1
 
         static void Main(string[] args)
         {
-            Ergometer.Create("COM3");
+            Server server = new Server( new[] { "http://localhost:80/" } );
         }
 
 
