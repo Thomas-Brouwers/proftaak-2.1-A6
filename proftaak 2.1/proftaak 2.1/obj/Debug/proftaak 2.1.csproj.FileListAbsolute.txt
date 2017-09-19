@@ -14,3 +14,8 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.pdb
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak_2._1.Form1.resources
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak_2._1.Form1.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\VRconnection.Form2.resources
