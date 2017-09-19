@@ -13,10 +13,6 @@ namespace proftaak_2._1
     {
         private SerialPort serialPort;
         string[] data2;
-        //static void Main(string[] args)
-        //{
-        //    new SerialPortProgram();
-        //}
 
 
         public SerialPortProgram(String port)
