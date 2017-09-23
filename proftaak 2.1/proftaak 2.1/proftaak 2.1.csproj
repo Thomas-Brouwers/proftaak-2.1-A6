@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientInfo.cs" />
     <Compile Include="Ergometer.cs" />
     <Compile Include="FakeData.cs" />
     <Compile Include="Form1.cs">
