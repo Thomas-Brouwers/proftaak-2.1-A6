@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace proftaak_2._1
 {
-    class ClientInfo
+    [Serializable]
+   public class ClientInfo
     {
         string name;
         string password;

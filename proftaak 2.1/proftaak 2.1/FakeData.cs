@@ -24,10 +24,10 @@ namespace proftaak_2._1
         string data;
         string[] data2;
 
-        static void Main(string[] args)
-        {
-            Server server = new Server( new[] { "http://localhost:80/" } );
-        }
+        //static void Main(string[] args)
+        //{
+        //    Server server = new Server( new[] { "http://localhost:80/" } );
+        //}
 
 
         public FakeData()
