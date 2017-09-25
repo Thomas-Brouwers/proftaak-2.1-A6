@@ -1,7 +1,6 @@
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe.config
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.pdb
-C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csprojResolveAssemblyReference.cache
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.CoreCompileInputs.cache
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.exe
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.pdb
@@ -14,3 +13,21 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.pdb
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak_2._1.Form1.resources
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak_2._1.Form1.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\VRconnection.Form2.resources
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csprojResolveAssemblyReference.cache
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak_2._1.Form1.resources
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\VRconnection.Form2.resources
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.GenerateResource.Cache
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.CoreCompileInputs.cache
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.exe
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.pdb
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe.config
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.pdb
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.dll
+D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csprojResolveAssemblyReference.cache

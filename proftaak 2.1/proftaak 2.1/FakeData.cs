@@ -24,10 +24,10 @@ namespace proftaak_2._1
         string data;
         string[] data2;
 
-        static void Main(string[] args)
-        {
-            Ergometer.Create("COM3");
-        }
+       // static void Main(string[] args)
+       // {
+      //     Ergometer.Create("COM3");
+      //  }
 
 
         public FakeData()

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace proftaak_2._1
 {
@@ -22,24 +16,22 @@ namespace proftaak_2._1
         {
             this.spp = spp;
             simulator = false;
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            Timer timer = new Timer();
             timer.Tick += new EventHandler(TimerEventProcessor);
             timer.Interval = 1000;
             InitializeComponent();
             timer.Start();
-            
         }
 
         public Form1(FakeData fd)
         {
             this.fd = fd;
             simulator = true;
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            Timer timer = new Timer();
             timer.Tick += new EventHandler(TimerEventProcessor);
             timer.Interval = 500;
             InitializeComponent();
             timer.Start();
-
         }
 
         private void update()
