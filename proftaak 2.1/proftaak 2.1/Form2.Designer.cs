@@ -28,41 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.ConnectionsCB = new System.Windows.Forms.ComboBox();
+            this.ConnectionsBT = new System.Windows.Forms.Button();
+            this.TimeCB = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.TimeBT = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.PlayBT = new System.Windows.Forms.Button();
+            this.PaneBT = new System.Windows.Forms.Button();
+            this.TreeBT = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // ConnectionsCB
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(70, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            this.ConnectionsCB.FormattingEnabled = true;
+            this.ConnectionsCB.Location = new System.Drawing.Point(70, 10);
+            this.ConnectionsCB.Name = "ConnectionsCB";
+            this.ConnectionsCB.Size = new System.Drawing.Size(121, 21);
+            this.ConnectionsCB.TabIndex = 0;
             // 
-            // button1
+            // ConnectionsBT
             // 
-            this.button1.Location = new System.Drawing.Point(197, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Select";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ConnectionsBT.Location = new System.Drawing.Point(197, 10);
+            this.ConnectionsBT.Name = "ConnectionsBT";
+            this.ConnectionsBT.Size = new System.Drawing.Size(75, 23);
+            this.ConnectionsBT.TabIndex = 1;
+            this.ConnectionsBT.Text = "Select";
+            this.ConnectionsBT.UseVisualStyleBackColor = true;
+            this.ConnectionsBT.Click += new System.EventHandler(this.ConnectionsBT_Click);
             // 
-            // comboBox2
+            // TimeCB
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(70, 47);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 2;
+            this.TimeCB.FormattingEnabled = true;
+            this.TimeCB.Location = new System.Drawing.Point(70, 47);
+            this.TimeCB.Name = "TimeCB";
+            this.TimeCB.Size = new System.Drawing.Size(121, 21);
+            this.TimeCB.TabIndex = 2;
             // 
             // label1
             // 
@@ -82,15 +84,15 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Time";
             // 
-            // button2
+            // TimeBT
             // 
-            this.button2.Location = new System.Drawing.Point(197, 47);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Set time";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.TimeBT.Location = new System.Drawing.Point(197, 47);
+            this.TimeBT.Name = "TimeBT";
+            this.TimeBT.Size = new System.Drawing.Size(75, 23);
+            this.TimeBT.TabIndex = 5;
+            this.TimeBT.Text = "Set time";
+            this.TimeBT.UseVisualStyleBackColor = true;
+            this.TimeBT.Click += new System.EventHandler(this.TimeBT_Click);
             // 
             // button3
             // 
@@ -102,29 +104,51 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // PlayBT
             // 
-            this.button4.Location = new System.Drawing.Point(116, 76);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Play";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.PlayBT.Location = new System.Drawing.Point(116, 76);
+            this.PlayBT.Name = "PlayBT";
+            this.PlayBT.Size = new System.Drawing.Size(75, 23);
+            this.PlayBT.TabIndex = 7;
+            this.PlayBT.Text = "Play";
+            this.PlayBT.UseVisualStyleBackColor = true;
+            this.PlayBT.Click += new System.EventHandler(this.PlayBT_Click);
+            // 
+            // PaneBT
+            // 
+            this.PaneBT.Location = new System.Drawing.Point(15, 76);
+            this.PaneBT.Name = "PaneBT";
+            this.PaneBT.Size = new System.Drawing.Size(75, 23);
+            this.PaneBT.TabIndex = 8;
+            this.PaneBT.Text = "Pane";
+            this.PaneBT.UseVisualStyleBackColor = true;
+            this.PaneBT.Click += new System.EventHandler(this.PaneBT_Click);
+            // 
+            // TreeBT
+            // 
+            this.TreeBT.Location = new System.Drawing.Point(12, 105);
+            this.TreeBT.Name = "TreeBT";
+            this.TreeBT.Size = new System.Drawing.Size(75, 23);
+            this.TreeBT.TabIndex = 9;
+            this.TreeBT.Text = "Tree";
+            this.TreeBT.UseVisualStyleBackColor = true;
+            this.TreeBT.Click += new System.EventHandler(this.TreeBT_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.TreeBT);
+            this.Controls.Add(this.PaneBT);
+            this.Controls.Add(this.PlayBT);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.TimeBT);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.TimeCB);
+            this.Controls.Add(this.ConnectionsBT);
+            this.Controls.Add(this.ConnectionsCB);
             this.Name = "Form2";
             this.Text = "Form2";
             this.ResumeLayout(false);
@@ -134,13 +158,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox ConnectionsCB;
+        private System.Windows.Forms.Button ConnectionsBT;
+        private System.Windows.Forms.ComboBox TimeCB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button TimeBT;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button PlayBT;
+        private System.Windows.Forms.Button PaneBT;
+        private System.Windows.Forms.Button TreeBT;
     }
 }

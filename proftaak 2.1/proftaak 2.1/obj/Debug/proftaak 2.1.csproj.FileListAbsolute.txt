@@ -1,7 +1,6 @@
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe.config
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.pdb
-C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csprojResolveAssemblyReference.cache
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csproj.CoreCompileInputs.cache
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.exe
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.pdb
@@ -31,3 +30,4 @@ D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.exe
 D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\proftaak 2.1.pdb
 D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.dll
 D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csprojResolveAssemblyReference.cache

@@ -60,7 +60,9 @@ namespace VRconnection
                 int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
                 totalReceived += receivedCount;
             }
-            return JObject.Parse(Encoding.UTF8.GetString(buffer));
+            JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+            Console.WriteLine(Json);
+            return Json;
         }
 
         public JArray getClientInfo() {
