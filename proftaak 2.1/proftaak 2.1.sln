@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proftaak 2.1", "proftaak 2.1\proftaak 2.1.csproj", "{3F7DAA95-300F-42D6-99DC-68E56A5699DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "..\..\..\TestClient\Server.csproj", "{434B69FA-37D5-41B4-B22F-F7AA633B187B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "TestClient\Server.csproj", "{434B69FA-37D5-41B4-B22F-F7AA633B187B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
