@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace proftaak_2._1
 {
@@ -14,24 +16,22 @@ namespace proftaak_2._1
         {
             this.spp = spp;
             simulator = false;
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            Timer timer = new Timer();
             timer.Tick += new EventHandler(TimerEventProcessor);
             timer.Interval = 1000;
             InitializeComponent();
             timer.Start();
-
         }
 
         public Form1(FakeData fd)
         {
             this.fd = fd;
             simulator = true;
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            Timer timer = new Timer();
             timer.Tick += new EventHandler(TimerEventProcessor);
             timer.Interval = 500;
             InitializeComponent();
             timer.Start();
-
         }
 
         private void update()
@@ -55,8 +55,7 @@ namespace proftaak_2._1
             if (simulator)
             {
                 data = fd.update();
-            }
-            else
+            } else
             {
                 data = spp.update();
             }

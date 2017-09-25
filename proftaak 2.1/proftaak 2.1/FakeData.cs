@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace proftaak_2._1
 {
-    public class FakeData : Ergometer, ISimulator
+   public class FakeData : Ergometer, ISimulator
     {
         Random rand = new Random();
         int pulse = 0;
@@ -24,6 +24,12 @@ namespace proftaak_2._1
         string data;
         string[] data2;
 
+       // static void Main(string[] args)
+       // {
+      //     Ergometer.Create("COM3");
+      //  }
+
+
         public FakeData()
         {
             requestedPower = rand.Next(1, 80) * 5;
@@ -31,15 +37,13 @@ namespace proftaak_2._1
             Console.WriteLine("Sending Data");
         }
 
-        public string[] update()
-        {
+        public string[] update() {
             pulse = rand.Next(80, 120);
             rpm = rand.Next(50, 100);
             speed = rpm * 7 / 20;
             distance += speed / 7.2;
             timeCurrent = DateTime.Now - timeOnStart;
-            if (actualPower < requestedPower)
-            {
+            if (actualPower < requestedPower) {
                 actualPower += 5;
             }
             data = "\r" + pulse + "\t" + rpm + "\t" + speed + "\t" + Math.Round(distance) + "\t" + requestedPower + "\t" + energy + "\t" + timeCurrent.ToString(@"mm\:ss") + "\t" + actualPower;
