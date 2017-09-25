@@ -19,7 +19,7 @@ namespace proftaak_2._1
             timer.Interval = 1000;
             InitializeComponent();
             timer.Start();
-            
+
         }
 
         public Form1(FakeData fd)
@@ -55,7 +55,8 @@ namespace proftaak_2._1
             if (simulator)
             {
                 data = fd.update();
-            } else
+            }
+            else
             {
                 data = spp.update();
             }

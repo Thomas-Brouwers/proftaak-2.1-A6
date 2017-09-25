@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace proftaak_2._1
 {
     [Serializable]
-   public class ClientInfo
+    public class ClientInfo
     {
         string name;
         string password;
@@ -19,7 +19,7 @@ namespace proftaak_2._1
         int avgPower;
         int energy;
         TimeSpan time;
-        
+
 
         public ClientInfo(string name, string password)
         {

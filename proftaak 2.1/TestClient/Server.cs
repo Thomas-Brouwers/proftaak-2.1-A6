@@ -9,7 +9,7 @@ using System.Text;
 
 class Server
 {
-    
+
     public static void Main()
     {
         List<ClientInfo> clientInfo = new List<ClientInfo>();
@@ -28,7 +28,6 @@ class Server
 
             // Buffer for reading data
             Byte[] bytes = new Byte[256];
-            String data = null;
 
             // Enter the listening loop.
             while (true)
@@ -50,7 +49,7 @@ class Server
 
                 clientInfo = (List<ClientInfo>)(formatter.Deserialize(stream));
 
-               
+
 
                 Console.WriteLine("Received: {0} {1}", clientInfo[0].Name, clientInfo[0].Password);
 
