@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Net.Sockets;
 using System.IO;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace VRconnection
 {
@@ -12,10 +12,10 @@ namespace VRconnection
     {
         TcpClient client;
         Stream stream;
-        static void Main(string[] args)
-        {
-            new VRConnector();
-        }
+        //static void Main(string[] args)
+        //{
+        //    new VRConnector();
+        //}
 
         public VRConnector()
         {
