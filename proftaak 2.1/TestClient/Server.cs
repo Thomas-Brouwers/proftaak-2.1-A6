@@ -40,32 +40,25 @@ class Server
                 TcpClient client = server.AcceptTcpClient();
                 Console.WriteLine("Connected!");
 
-                data = null;
+                //data = null;
 
                 // Get a stream object for reading and writing
                 NetworkStream stream = client.GetStream();
 
-                int i;
+                // Process the data sent by the client.
+                BinaryFormatter formatter = new BinaryFormatter();
 
-                // Loop to receive all the data sent by the client.
-                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-                {
-                    // Translate data bytes to a ASCII string.
-                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                    Console.WriteLine("Received: {0}", data);
+                clientInfo = (List<ClientInfo>)(formatter.Deserialize(stream));
 
-                    // Process the data sent by the client.
-                    data = data.ToUpper();
-                    BinaryFormatter formatter = new BinaryFormatter();
+               
 
-                    clientInfo = (List<ClientInfo>)(formatter.Deserialize(stream));
+                Console.WriteLine("Received: {0} {1}", clientInfo[0].Name, clientInfo[0].Password);
 
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes("gelukt");
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes("gelukt");
 
-                    // Send back a response.
-                    stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine("Sent: {0}",clientInfo[0]);
-                }
+                // Send back a response.
+                stream.Write(msg, 0, msg.Length);
+                Console.WriteLine("Sent: {0}", "gelukt");
 
                 // Shutdown and end connection
                 client.Close();

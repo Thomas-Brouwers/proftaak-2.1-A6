@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace TestClient
 {
     class Client
+        //testclient om de server te testen
     {
         static void Main(string[] args)
         {
@@ -29,12 +30,9 @@ namespace TestClient
                     NetworkStream stream = client.GetStream();
 
                     // Send the message to the connected TcpServer. 
-                    //stream.Write(data, 0, data.Length);
-                    clientInfo.Add(new ClientInfo("bert", "123", 100, 2500, 50, 200, 100, 500));
+                    clientInfo.Add(new ClientInfo("bert", "123"));
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(stream, clientInfo);
-
-                    Console.WriteLine("Sent: {0}", "sup");
 
                     // Receive the TcpServer.response.
 
