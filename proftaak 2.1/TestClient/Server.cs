@@ -1,17 +1,22 @@
-﻿using proftaak_2._1;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using proftaak_2._1;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 class Server
 {
-
+    Stream stream;
     public static void Main()
     {
+        new Server();
+    }
+
+    public Server() {
         List<ClientInfo> clientInfo = new List<ClientInfo>();
         TcpListener server = null;
         try
@@ -33,31 +38,27 @@ class Server
             while (true)
             {
                 Console.Write("Waiting for a connection... ");
-
-                // Perform a blocking call to accept requests.
-                // You could also user server.AcceptSocket() here.
+                
                 TcpClient client = server.AcceptTcpClient();
                 Console.WriteLine("Connected!");
 
                 //data = null;
 
                 // Get a stream object for reading and writing
-                NetworkStream stream = client.GetStream();
+                stream = client.GetStream();
 
                 // Process the data sent by the client.
-                BinaryFormatter formatter = new BinaryFormatter();
 
-                clientInfo = (List<ClientInfo>)(formatter.Deserialize(stream));
+                JObject data = readObject();
+                saveData(data);
 
 
 
-                Console.WriteLine("Received: {0} {1}", clientInfo[0].Name, clientInfo[0].Password);
-
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes("gelukt");
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes("Acknowledged");
 
                 // Send back a response.
                 stream.Write(msg, 0, msg.Length);
-                Console.WriteLine("Sent: {0}", "gelukt");
+                Console.WriteLine("Sent: {0}", "Acknowledged");
 
                 // Shutdown and end connection
                 client.Close();
@@ -76,5 +77,33 @@ class Server
 
         Console.WriteLine("\nHit enter to continue...");
         Console.Read();
+    }
+
+
+    public JObject readObject()
+    {
+        byte[] preBuffer = new Byte[4];
+        stream.Read(preBuffer, 0, 4);
+        int lenght = BitConverter.ToInt32(preBuffer, 0);
+        byte[] buffer = new Byte[lenght];
+        int totalReceived = 0;
+        while (totalReceived < lenght)
+        {
+            int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+            totalReceived += receivedCount;
+        }
+        JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+        Console.WriteLine(Json);
+        return Json;
+    }
+
+    public void saveData(JObject data)
+    {
+        using (StreamWriter file = File.CreateText("data.txt"))
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            //serialize object directly into file stream
+            serializer.Serialize(file, data);
+        }
     }
 }
