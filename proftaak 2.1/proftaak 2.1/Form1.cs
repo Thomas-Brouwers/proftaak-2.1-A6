@@ -20,6 +20,9 @@ namespace proftaak_2._1
             timer.Tick += new EventHandler(TimerEventProcessor);
             timer.Interval = 1000;
             InitializeComponent();
+            for (int i = 5; i <= 80; i++) {
+                PowerCB.Items.Add(i * 5);
+            }
             timer.Start();
         }
 
@@ -60,6 +63,12 @@ namespace proftaak_2._1
                 data = spp.update();
             }
             update();
+        }
+
+        private void PowerBT_Click(object sender, EventArgs e)
+        {
+            spp.write("cd");
+            spp.write("pw " + (PowerCB.SelectedIndex * 5 + 25));
         }
     }
 }

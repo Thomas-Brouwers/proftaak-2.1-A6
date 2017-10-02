@@ -44,6 +44,8 @@
             this.requestedPowerValue = new System.Windows.Forms.Label();
             this.actualPower = new System.Windows.Forms.Label();
             this.actualPowerValue = new System.Windows.Forms.Label();
+            this.PowerBT = new System.Windows.Forms.Button();
+            this.PowerCB = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // speed
@@ -190,9 +192,29 @@
             this.actualPowerValue.TabIndex = 15;
             this.actualPowerValue.Text = "actualPowerValue";
             // 
+            // PowerBT
+            // 
+            this.PowerBT.Location = new System.Drawing.Point(172, 243);
+            this.PowerBT.Name = "PowerBT";
+            this.PowerBT.Size = new System.Drawing.Size(75, 23);
+            this.PowerBT.TabIndex = 16;
+            this.PowerBT.Text = "Set Power";
+            this.PowerBT.UseVisualStyleBackColor = true;
+            this.PowerBT.Click += new System.EventHandler(this.PowerBT_Click);
+            // 
+            // PowerCB
+            // 
+            this.PowerCB.FormattingEnabled = true;
+            this.PowerCB.Location = new System.Drawing.Point(26, 245);
+            this.PowerCB.Name = "PowerCB";
+            this.PowerCB.Size = new System.Drawing.Size(121, 21);
+            this.PowerCB.TabIndex = 17;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(315, 278);
+            this.Controls.Add(this.PowerCB);
+            this.Controls.Add(this.PowerBT);
             this.Controls.Add(this.actualPowerValue);
             this.Controls.Add(this.actualPower);
             this.Controls.Add(this.requestedPowerValue);
@@ -234,6 +256,7 @@
         private System.Windows.Forms.Label requestedPowerValue;
         private System.Windows.Forms.Label actualPower;
         private System.Windows.Forms.Label actualPowerValue;
-
+        private System.Windows.Forms.Button PowerBT;
+        private System.Windows.Forms.ComboBox PowerCB;
     }
 }

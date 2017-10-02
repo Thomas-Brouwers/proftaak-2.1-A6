@@ -16,10 +16,10 @@ namespace VRconnection
 
         
 
-        //static void Main(string[] args)
-        //{
-        //    new VRConnector();
-        //}
+        static void Main(string[] args)
+        {
+            new VRConnector();
+        }
 
         public VRConnector()
         {
@@ -28,7 +28,7 @@ namespace VRconnection
                 client = new TcpClient();
                 client.Connect("145.48.6.10", 6666);
                 stream = client.GetStream();
-                Application.Run(new Form2(this));
+                Application.Run(new VRForm(this));
 
             }
             catch (ArgumentNullException e)
