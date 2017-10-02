@@ -10,12 +10,16 @@ namespace VRconnection
 {
     public class VRConnector
     {
+        string destination;
         TcpClient client;
         Stream stream;
-        //static void Main(string[] args)
-        //{
-        //    new VRConnector();
-        //}
+
+        
+
+        static void Main(string[] args)
+        {
+            new VRConnector();
+        }
 
         public VRConnector()
         {
@@ -24,7 +28,7 @@ namespace VRconnection
                 client = new TcpClient();
                 client.Connect("145.48.6.10", 6666);
                 stream = client.GetStream();
-                Application.Run(new Form2(this));
+                Application.Run(new VRForm(this));
 
             }
             catch (ArgumentNullException e)
@@ -39,6 +43,30 @@ namespace VRconnection
 
         public void send(string message)
         {
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
+
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            stream.Write(buffer, 0, buffer.Length);
+        }
+
+        public void sendJson(JObject Json)
+        {
+            dynamic toJson = new
+            {
+                id = "tunnel/send",
+                data = new
+                {
+                    dest = destination,
+                    data = Json
+                }
+            };
+
+            string message = JsonConvert.SerializeObject(toJson);
+
             byte[] prefix = BitConverter.GetBytes(message.Length);
             byte[] request = Encoding.Default.GetBytes(message);
 
@@ -79,5 +107,7 @@ namespace VRconnection
             return ((JArray)sessionlist.GetValue("data"));
 
         }
+
+        public string Destination { get => destination; set => destination = value; }
     }
 }

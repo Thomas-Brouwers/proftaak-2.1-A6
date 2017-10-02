@@ -33,4 +33,3 @@ D:\SourcTree dingen\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.xml
 C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\proftaak 2.1\obj\Debug\proftaak 2.1.csprojResolveAssemblyReference.cache
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.dll
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\bin\Debug\Newtonsoft.Json.xml
-C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\proftaak 2.1\obj\Debug\VRconnection.Form2.resources
