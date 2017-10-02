@@ -1,19 +1,22 @@
-﻿using proftaak_2._1;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 class Server
 {
-
+    Stream stream;
     public static void Main()
     {
-        List<ClientInfo> clientInfo = new List<ClientInfo>();
+        new Server();
+    }
+
+    public Server() {
         TcpListener server = null;
+        string data = null;
         try
         {
             // Set the TcpListener on port 13000.
@@ -33,34 +36,41 @@ class Server
             while (true)
             {
                 Console.Write("Waiting for a connection... ");
-
-                // Perform a blocking call to accept requests.
-                // You could also user server.AcceptSocket() here.
+                
                 TcpClient client = server.AcceptTcpClient();
                 Console.WriteLine("Connected!");
 
-                //data = null;
+                data = null;
 
                 // Get a stream object for reading and writing
-                NetworkStream stream = client.GetStream();
-
+                stream = client.GetStream();
+                int i;
                 // Process the data sent by the client.
-                BinaryFormatter formatter = new BinaryFormatter();
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                    Console.WriteLine("Received: {0}", data);
 
-                clientInfo = (List<ClientInfo>)(formatter.Deserialize(stream));
 
+                    //SaveData(JsonConvert.SerializeObject(data));
 
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes($"Received: {data}");
 
-                Console.WriteLine("Received: {0} {1}", clientInfo[0].Name, clientInfo[0].Password);
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: {0}", "Acknowledged");
+                }
 
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes("gelukt");
-
-                // Send back a response.
-                stream.Write(msg, 0, msg.Length);
-                Console.WriteLine("Sent: {0}", "gelukt");
 
                 // Shutdown and end connection
-                client.Close();
+                if (data == "bye")
+                {
+                    client.Close();
+                } else if(data == "quit")
+                {
+                    client.Close();
+                    break;
+                }
             }
         }
         catch (SocketException e)
@@ -76,5 +86,54 @@ class Server
 
         Console.WriteLine("\nHit enter to continue...");
         Console.Read();
+    }
+
+
+    public JObject ReadObject()
+    {
+        byte[] preBuffer = new Byte[4];
+        stream.Read(preBuffer, 0, 4);
+        int lenght = BitConverter.ToInt32(preBuffer, 0);
+        byte[] buffer = new Byte[lenght];
+        int totalReceived = 0;
+        while (totalReceived < lenght)
+        {
+            int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+            totalReceived += receivedCount;
+        }
+        JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+        Console.WriteLine(Json);
+        return Json;
+    }
+
+    public void SaveData(string message)
+    {
+        using (StreamWriter file = File.CreateText("data.txt"))
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            //serialize object directly into file stream
+            serializer.Serialize(file, message);
+        }
+    }
+
+    public dynamic LoadData()
+    {
+        using (StreamReader file = File.OpenText("data.txt"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                return serializer.Deserialize(file, typeof(string));
+            }
+    }
+
+    public void SendDoctor(string message)
+    {
+        byte[] prefix = BitConverter.GetBytes(message.Length);
+        byte[] request = Encoding.Default.GetBytes(message);
+
+        byte[] buffer = new Byte[prefix.Length + message.Length];
+        prefix.CopyTo(buffer, 0);
+        request.CopyTo(buffer, prefix.Length);
+
+        stream.Write(buffer, 0, buffer.Length);
     }
 }

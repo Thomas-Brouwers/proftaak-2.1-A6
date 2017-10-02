@@ -1,6 +1,7 @@
 ﻿using proftaak_2._1;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -11,7 +12,6 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-            List<ClientInfo> clientInfo = new List<ClientInfo>();
             try
             {
                 // Create a TcpClient.
@@ -22,17 +22,15 @@ namespace TestClient
                 TcpClient client = new TcpClient("127.0.0.1", port);
 
                 // Translate the passed message into ASCII and store it as a Byte array.
-                Byte[] data = System.Text.Encoding.ASCII.GetBytes("sup");
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes("quit");
 
                 // Get a client stream for reading and writing.
-                //  Stream stream = client.GetStream();
-
-                NetworkStream stream = client.GetStream();
+                  Stream stream = client.GetStream();
+                
 
                 // Send the message to the connected TcpServer. 
-                clientInfo.Add(new ClientInfo("bert", "123"));
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(stream, clientInfo);
+
+                stream.Write(data, 0, data.Length);
 
                 // Receive the TcpServer.response.
 
@@ -45,7 +43,7 @@ namespace TestClient
                 // Read the first batch of the TcpServer response bytes.
                 Int32 bytes = stream.Read(data, 0, data.Length);
                 responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                Console.WriteLine("Received: {0}", responseData);
+                Console.WriteLine("Server response: {0}", responseData);
 
                 // Close everything.
                 stream.Close();
@@ -63,6 +61,17 @@ namespace TestClient
             Console.WriteLine("\n Press Enter to continue...");
             Console.Read();
         }
+        //public void send(string message)
+        //{
+        //    byte[] prefix = BitConverter.GetBytes(message.Length);
+        //    byte[] request = Encoding.Default.GetBytes(message);
+
+        //    byte[] buffer = new Byte[prefix.Length + message.Length];
+        //    prefix.CopyTo(buffer, 0);
+        //    request.CopyTo(buffer, prefix.Length);
+
+        //    stream.Write(buffer, 0, buffer.Length);
+        //}
     }
 }
 
