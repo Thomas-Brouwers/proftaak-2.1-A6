@@ -17,8 +17,8 @@ class Server
     }
 
     public Server() {
-        List<ClientInfo> clientInfo = new List<ClientInfo>();
         TcpListener server = null;
+        string data = null;
         try
         {
             // Set the TcpListener on port 13000.
@@ -42,26 +42,37 @@ class Server
                 TcpClient client = server.AcceptTcpClient();
                 Console.WriteLine("Connected!");
 
-                //data = null;
+                data = null;
 
                 // Get a stream object for reading and writing
                 stream = client.GetStream();
-
+                int i;
                 // Process the data sent by the client.
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                    Console.WriteLine("Received: {0}", data);
 
-                JObject data = readObject();
-                saveData(data);
 
+                    //SaveData(JsonConvert.SerializeObject(data));
 
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes($"Received: {data}");
 
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes("Acknowledged");
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: {0}", "Acknowledged");
+                }
 
-                // Send back a response.
-                stream.Write(msg, 0, msg.Length);
-                Console.WriteLine("Sent: {0}", "Acknowledged");
 
                 // Shutdown and end connection
-                client.Close();
+                if (data == "bye")
+                {
+                    client.Close();
+                } else if(data == "quit")
+                {
+                    client.Close();
+                    break;
+                }
             }
         }
         catch (SocketException e)
@@ -80,7 +91,7 @@ class Server
     }
 
 
-    public JObject readObject()
+    public JObject ReadObject()
     {
         byte[] preBuffer = new Byte[4];
         stream.Read(preBuffer, 0, 4);
@@ -97,13 +108,34 @@ class Server
         return Json;
     }
 
-    public void saveData(JObject data)
+    public void SaveData(string message)
     {
         using (StreamWriter file = File.CreateText("data.txt"))
         {
             JsonSerializer serializer = new JsonSerializer();
             //serialize object directly into file stream
-            serializer.Serialize(file, data);
+            serializer.Serialize(file, message);
         }
+    }
+
+    public dynamic LoadData()
+    {
+        using (StreamReader file = File.OpenText("data.txt"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                return serializer.Deserialize(file, typeof(string));
+            }
+    }
+
+    public void SendDoctor(string message)
+    {
+        byte[] prefix = BitConverter.GetBytes(message.Length);
+        byte[] request = Encoding.Default.GetBytes(message);
+
+        byte[] buffer = new Byte[prefix.Length + message.Length];
+        prefix.CopyTo(buffer, 0);
+        request.CopyTo(buffer, prefix.Length);
+
+        stream.Write(buffer, 0, buffer.Length);
     }
 }
