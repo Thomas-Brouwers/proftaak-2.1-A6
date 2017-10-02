@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace proftaak_2._1
 {
-    public class SerialPortProgram : Ergometer, ISimulator
+    public class SerialPortProgram : Ergometer
     {
         private SerialPort serialPort;
         string[] data2;

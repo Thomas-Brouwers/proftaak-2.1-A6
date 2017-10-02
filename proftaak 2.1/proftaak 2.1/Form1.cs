@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace proftaak_2._1
 {

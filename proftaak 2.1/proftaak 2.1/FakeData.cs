@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace proftaak_2._1
 {
-   public class FakeData : Ergometer, ISimulator
+    public class FakeData : Ergometer
     {
         Random rand = new Random();
         int pulse = 0;
@@ -23,12 +17,6 @@ namespace proftaak_2._1
         TimeSpan timeCurrent;
         string data;
         string[] data2;
-
-       // static void Main(string[] args)
-       // {
-      //     Ergometer.Create("COM3");
-      //  }
-
 
         public FakeData()
         {
