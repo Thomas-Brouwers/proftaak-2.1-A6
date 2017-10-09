@@ -10,3 +10,4 @@ D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.exe
 D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.pdb
 D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.Form2.resources
 D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.Form3.resources
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.Form4.resources
