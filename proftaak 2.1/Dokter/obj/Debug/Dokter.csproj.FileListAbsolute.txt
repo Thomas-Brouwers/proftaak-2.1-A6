@@ -1,0 +1,10 @@
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\bin\Debug\Dokter.exe.config
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\bin\Debug\Dokter.exe
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\bin\Debug\Dokter.pdb
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.csprojResolveAssemblyReference.cache
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.Form1.resources
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.Properties.Resources.resources
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.csproj.GenerateResource.Cache
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.csproj.CoreCompileInputs.cache
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.exe
+D:\School\Periode 2\Proftaak\Project\proftaak 2.1\Dokter\obj\Debug\Dokter.pdb
