@@ -66,9 +66,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\proftaak 2.1\proftaak 2.1.csproj">
+    <ProjectReference Include="..\proftaak 2.1\Kettler.csproj">
       <Project>{3F7DAA95-300F-42D6-99DC-68E56A5699DE}</Project>
-      <Name>proftaak 2.1</Name>
+      <Name>Kettler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

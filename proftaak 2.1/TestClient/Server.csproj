@@ -54,9 +54,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\proftaak 2.1\proftaak 2.1.csproj">
+    <ProjectReference Include="..\proftaak 2.1\Kettler.csproj">
       <Project>{3f7daa95-300f-42d6-99dc-68e56a5699de}</Project>
-      <Name>proftaak 2.1</Name>
+      <Name>Kettler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
