@@ -9,7 +9,7 @@ using System.Threading;
 
 class Server
 {
-    Stream stream;
+    NetworkStream stream;
     string data;
     public static void Main()
     {
@@ -48,10 +48,6 @@ class Server
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
                 clientThread.Start(client);
-
-                client.Close();
-
-
             }
 
 
