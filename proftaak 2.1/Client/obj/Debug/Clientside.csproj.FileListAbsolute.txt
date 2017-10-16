@@ -1,0 +1,15 @@
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\Client.exe.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\Client.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\Client.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\ConsoleApp1.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\proftaak 2.1.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\proftaak 2.1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\proftaak 2.1.dll.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\ConsoleApp1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\ConsoleApp1.exe.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Clientside.csprojResolveAssemblyReference.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Clientside.csproj.CoreCompileInputs.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Client.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Client.pdb
