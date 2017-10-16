@@ -33,16 +33,23 @@ namespace Dokter
         {
             username = textBox1.Text;
             password = textBox2.Text;
-            if(comboBox1.SelectedIndex == 0)
+            if (username == "doctor" && password == "password")
             {
-                Form1 form1 = new Form1();
-                form1.Show();
-                this.Close();
+                if (comboBox1.SelectedIndex == 0)
+                {
+                    Form1 form1 = new Form1();
+                    form1.Show();
+                    this.Close();
+                }
+                else
+                {
+                    Form4 form4 = new Form4();
+                    form4.Show();
+                    this.Close();
+                }
             } else
             {
-                Form4 form4 = new Form4();
-                form4.Show();
-                this.Close();
+                MessageBox.Show("verkeerde username of wachtwoord ingevoerd");
             }
         }
     }
