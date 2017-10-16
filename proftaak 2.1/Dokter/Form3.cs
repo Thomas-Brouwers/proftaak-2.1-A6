@@ -12,9 +12,22 @@ namespace Dokter
 {
     public partial class Form3 : Form
     {
+        List<string> textboxHistory = new List<string>();
         public Form3()
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateText(textBox1.Text.ToString());
+        }
+
+        private void UpdateText(string text)
+        {
+            textboxHistory.Add(text);
+            textBox2.Text = string.Join("\r\n", textboxHistory);
+        }
+        
     }
 }

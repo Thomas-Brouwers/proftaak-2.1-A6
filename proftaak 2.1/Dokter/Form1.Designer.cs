@@ -489,6 +489,7 @@
             this.button9.TabIndex = 20;
             this.button9.Text = "chat";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
