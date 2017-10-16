@@ -12,23 +12,13 @@ namespace VRconnection
     {
 
         VRConnector vrConnector;
-        public VRCommands(VRConnector vr) {
-            vrConnector = vr;
-        }
-
-        public void HUD(string[] bycicleData, string HUDUuid)
+        public VRCommands(VRConnector vr)
         {
-            dynamic toJsonClear = new
-            {
-                id = "scene/panel/clear",
-                data = new
-                {
-                    id = HUDUuid
+            vrConnector = vr;
 
-                }
-            };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonClear)));
-
+        }
+        public void HUD(string[] bycicleData, string paneUuid)
+        {
             string displayText;
             for (int i = 0; i < 8; i++)
             {
@@ -67,23 +57,14 @@ namespace VRconnection
                     id = "scene/panel/drawtext",
                     data = new
                     {
-                        id = HUDUuid,
+                        id = paneUuid,
                         text = displayText,
                         position = new[] { 50 * (i / 4) + 150, 100.0 * (i % 4) + 100 },
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
                 vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
-
-                dynamic toJsonSwap = new
-                {
-                    id = "scene/panel/swap",
-                    data = new
-                    {
-                        id = HUDUuid
-                    }
-                };
-                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonSwap)));
+                Console.WriteLine(vrConnector.readObject());
             }
         }
 
@@ -113,44 +94,6 @@ namespace VRconnection
                 }
             };
             vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
-        }
-
-        public void getClients()
-        {
-            dynamic toJson = new
-            {
-                id = "session/list",
-                data = new { }
-            };
-            vrConnector.send(JsonConvert.SerializeObject(toJson));
-        }
-
-        public void connectClient(JArray data)
-        {
-            IEnumerator<JToken> enumerator = data.GetEnumerator();
-            enumerator.MoveNext();
-            for (int i = 0; i < data.Count; i++)
-            {
-                if (enumerator.Current.ToObject<JObject>().GetValue("clientinfo").ToObject<JObject>().GetValue("user").ToString() == "patri")
-                {
-                    i = data.Count;
-                }
-                else
-                {
-                    enumerator.MoveNext();
-                }
-            }
-
-            dynamic toJson = new
-            {
-                id = "tunnel/create",
-                data = new
-                {
-                    session = enumerator.Current.ToObject<JObject>().GetValue("id").ToString(),
-                    key = "brain"
-                }
-            };
-            vrConnector.send(JsonConvert.SerializeObject(toJson));
         }
     }
 }

@@ -1,0 +1,28 @@
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\obj\Debug\VRConnection.csprojResolveAssemblyReference.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\obj\Debug\VRconnection.VRForm.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\obj\Debug\VRConnection.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\obj\Debug\VRConnection.csproj.CoreCompileInputs.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\proftaak 2.1.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\proftaak 2.1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\ConsoleApp1\bin\Debug\proftaak 2.1.exe.config
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\proftaak 2.1.pdb
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\obj\Debug\VRConnection.csprojResolveAssemblyReference.cache
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\obj\Debug\VRconnection.VRForm.resources
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\obj\Debug\VRConnection.csproj.GenerateResource.Cache
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\obj\Debug\VRConnection.csproj.CoreCompileInputs.cache
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\proftaak 2.1.dll
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\ConsoleApp1\bin\Debug\proftaak 2.1.dll.config

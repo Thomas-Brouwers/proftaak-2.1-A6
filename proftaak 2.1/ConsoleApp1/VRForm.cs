@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using proftaak_2._1;
+
 namespace VRconnection
 {
     public partial class VRForm : Form
@@ -12,13 +13,14 @@ namespace VRconnection
         VRConnector vrConnector;
         string routeUuid, treeUuid, paneUuid, headUuid;
         SerialPortProgram spp;
+        Timer timer;
         
         public VRForm(VRConnector vr)
         {
             vrConnector = vr;
             //spp = new SerialPortProgram("Simulator");
             InitializeComponent();
-            //data = vrConnector.getClientInfo();
+            data = vrConnector.getClientInfo();
             IEnumerator<JToken> enumerator = data.GetEnumerator();
             enumerator.MoveNext();
             for (int i = 0; i < data.Count; i++)
@@ -317,6 +319,11 @@ namespace VRconnection
 
             vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson5)));
             Console.WriteLine(vrConnector.readObject());
+
+            timer = new Timer();
+            timer.Tick += new EventHandler(TimerEventProcessor);
+            timer.Interval = 1500;
+            timer.Start();
         }
 
         private void UpdateBT_Click(object sender, EventArgs e)
@@ -388,19 +395,23 @@ namespace VRconnection
 
 
         private void TimerEventProcessor(Object myObject,
-                                            EventArgs myEventArgs)
-        {
+                                            EventArgs myEventArgs) {
             string[] bycicleData = spp.update();
             string displayText;
-            
-            HUD(bycicleData);
-           
-            Console.WriteLine(vrConnector.readObject());
-        }
 
-        public void HUD(string[] bycicleData)
-        {
-            string displayText;
+            dynamic toJson1 = new
+            {
+                id = "scene/panel/clear",
+                data = new
+                {
+                    id = paneUuid
+
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson1)));
+
+
+
             for (int i = 0; i < 8; i++)
             {
                 switch (i)
@@ -440,12 +451,25 @@ namespace VRconnection
                     {
                         id = paneUuid,
                         text = displayText,
-                        position = new[] { 50 * (i / 4) + 150, 100.0 * (i % 4) + 100 },
+                        position = new[] {50 * (i / 4) + 150 , 100.0 * (i % 4) + 100 },
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
                 vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+                Console.WriteLine(vrConnector.readObject());
             }
+            dynamic toJson5 = new
+            {
+                id = "scene/panel/swap",
+                data = new
+                {
+                    id = paneUuid
+                }
+            };
+
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson5)));
+            Console.WriteLine(vrConnector.readObject());
+
         }
     }
 }
