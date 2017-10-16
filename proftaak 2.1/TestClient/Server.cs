@@ -96,11 +96,14 @@ class Server
             }
             else if (data == "doctor")
             {
-                HandleDoctor();
+                Thread doctorThread = new Thread(new ThreadStart(HandleDoctor));
+                doctorThread.Start();
             }
             else if (data == "client")
             {
-                HandleClient();
+                Thread patientThread = new Thread(new ThreadStart(HandleClient));
+                patientThread.Start();
+
             }
         }
     }
