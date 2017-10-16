@@ -39,7 +39,6 @@ namespace Clientside
             commands.load("Brain.json");
             commands.find("hud");
             commands.find("chat");
-           
         }
 
         public void clientStart() {

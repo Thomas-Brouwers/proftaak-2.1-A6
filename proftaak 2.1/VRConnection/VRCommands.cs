@@ -152,5 +152,11 @@ namespace VRconnection
             };
             vrConnector.send(JsonConvert.SerializeObject(toJson));
         }
+
+        public JArray refreshConnection(JObject Json)
+        {
+            return Json.GetValue("data").ToObject<JArray>();
+        }
+
     }
 }
