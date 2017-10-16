@@ -5,18 +5,20 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 class Server
 {
-    Stream stream;
+    NetworkStream stream;
+    string data;
     public static void Main()
     {
         new Server();
     }
 
-    public Server() {
+    public Server()
+    {
         TcpListener server = null;
-        string data = null;
         try
         {
             // Set the TcpListener on port 13000.
@@ -36,42 +38,19 @@ class Server
             while (true)
             {
                 Console.Write("Waiting for a connection... ");
-                
+
                 TcpClient client = server.AcceptTcpClient();
                 Console.WriteLine("Connected!");
 
-                data = null;
-
                 // Get a stream object for reading and writing
                 stream = client.GetStream();
-                int i;
-                // Process the data sent by the client.
-                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-                {
-                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                    Console.WriteLine("Received: {0}", data);
 
+                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
-                    //SaveData(JsonConvert.SerializeObject(data));
-
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes($"Received: {data}");
-
-                    // Send back a response.
-                    stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine("Sent: {0}", "Acknowledged");
-                }
-
-
-                // Shutdown and end connection
-                if (data == "bye")
-                {
-                    client.Close();
-                } else if(data == "quit")
-                {
-                    client.Close();
-                    break;
-                }
+                clientThread.Start(client);
             }
+
+
         }
         catch (SocketException e)
         {
@@ -88,6 +67,53 @@ class Server
         Console.Read();
     }
 
+    private void HandleClientComm(object client)
+    {
+        int i;
+        Byte[] bytes = new Byte[256];
+        data = null;
+        // Process the data sent by the client.
+        while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+        {
+            data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+            Console.WriteLine("Received: {0}", data);
+
+            //SaveData(JsonConvert.SerializeObject(data));
+
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes($"Received: {data}");
+
+            // Send back a response.
+            stream.Write(msg, 0, msg.Length);
+            Console.WriteLine("Sent: {0}", "Acknowledged");
+
+            if (data == "quit")
+            {
+                break;
+            }
+            else if (data == "doctor")
+            {
+                Thread doctorThread = new Thread(new ThreadStart(HandleDoctor));
+                doctorThread.Start();
+            }
+            else if (data == "client")
+            {
+                Thread patientThread = new Thread(new ThreadStart(HandleClient));
+                patientThread.Start();
+
+            }
+        }
+    }
+
+    private void HandleDoctor()
+    {
+
+    }
+
+    private void HandleClient()
+    {
+        SendObject(data);
+        SaveData(data);
+    }
 
     public JObject ReadObject()
     {
@@ -119,13 +145,13 @@ class Server
     public dynamic LoadData()
     {
         using (StreamReader file = File.OpenText("data.txt"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                return serializer.Deserialize(file, typeof(string));
-            }
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            return serializer.Deserialize(file, typeof(string));
+        }
     }
 
-    public void SendDoctor(string message)
+    public void SendObject(string message)
     {
         byte[] prefix = BitConverter.GetBytes(message.Length);
         byte[] request = Encoding.Default.GetBytes(message);
