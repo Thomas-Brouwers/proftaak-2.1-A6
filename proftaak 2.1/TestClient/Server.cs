@@ -56,11 +56,7 @@ class Server
                     Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
 
                     doctorThread.Start(client);
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
-
-                    // Send back a response.
-                    stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine("Sent: Acknowledged");
+                    
                 }
             
                 else if (jsondata.GetValue("id").ToString() == "client")
@@ -69,11 +65,7 @@ class Server
                     Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
                     clientThread.Start(client);
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
-
-                    // Send back a response.
-                    stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine("Sent: Acknowledged");
+                    
                 }
             }
             
@@ -105,11 +97,18 @@ class Server
             
             //SaveData(JsonConvert.SerializeObject(data));
 
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
+            
 
-            // Send back a response.
-            clientstream.Write(msg, 0, msg.Length);
-            Console.WriteLine("Sent: Acknowledged");
+            string message = JsonConvert.SerializeObject(jsondata);
+
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
+
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            doctorstream.Write(buffer, 0, buffer.Length);
 
         }
     }
@@ -122,16 +121,8 @@ class Server
         {
             jsondata = ReadObject();
 
-            //SaveData(JsonConvert.SerializeObject(data));
+            
 
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
-
-            // Send back a response.
-            doctorstream.Write(msg, 0, msg.Length);
-            Console.WriteLine("Sent: Acknowledged");
-
-            if (jsondata.GetValue("id").ToString() == "doctor/chat")
-            {
                 string message = JsonConvert.SerializeObject(jsondata);
 
                 byte[] prefix = BitConverter.GetBytes(message.Length);
@@ -142,13 +133,7 @@ class Server
                 request.CopyTo(buffer, prefix.Length);
 
                 clientstream.Write(buffer, 0, buffer.Length);
-                
-            }
-            else if (data == "client")
-            {
-
-
-            }
+             
         }
     }
 
