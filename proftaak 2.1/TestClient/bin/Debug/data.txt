@@ -1,1 +1,1 @@
-"{\"id\":\"test\",\"data\":{\"key\":\"test\"}}"
+"client"

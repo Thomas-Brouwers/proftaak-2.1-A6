@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,31 +26,31 @@ namespace Dokter
                 Int32 port = 13000;
                 TcpClient client = new TcpClient("127.0.0.1", port);
 
-                // Translate the passed message into ASCII and store it as a Byte array.
-                Byte[] data = System.Text.Encoding.ASCII.GetBytes("doctor");
-
-                // Get a client stream for reading and writing.
-                //  Stream stream = client.GetStream();
+               
 
                 stream = client.GetStream();
 
                 // Send the message to the connected TcpServer. 
-                stream.Write(data, 0, data.Length);
+                dynamic toJson = new
+                {
+                    id = "doctor",
+                    data = new
+                    {
+                        
+                    }
+                };
+                string message = JsonConvert.SerializeObject(toJson);
 
-                Console.WriteLine("Sent: {0}", "doctor");
+                byte[] prefix = BitConverter.GetBytes(message.Length);
+                byte[] request = Encoding.Default.GetBytes(message);
 
-                // Receive the TcpServer.response.
+                byte[] buffer = new Byte[prefix.Length + message.Length];
+                prefix.CopyTo(buffer, 0);
+                request.CopyTo(buffer, prefix.Length);
 
-                // Buffer to store the response bytes.
-                data = new Byte[256];
+                stream.Write(buffer, 0, buffer.Length);
 
-                // String to store the response ASCII representation.
-                String responseData = String.Empty;
-
-                // Read the first batch of the TcpServer response bytes.
-                Int32 bytes = stream.Read(data, 0, data.Length);
-                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                Console.WriteLine("Received: {0}", responseData);
+              
             }
             catch (ArgumentNullException e)
             {
@@ -59,9 +60,7 @@ namespace Dokter
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-
-            Console.WriteLine("\n Press Enter to continue...");
-            Console.Read();
+            
             InitializeComponent();
         }
 

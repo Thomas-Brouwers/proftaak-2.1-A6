@@ -10,7 +10,10 @@ using System.Threading;
 class Server
 {
     NetworkStream stream;
+    NetworkStream doctorstream;
+    NetworkStream clientstream;
     string data;
+    JObject jsondata;
     public static void Main()
     {
         new Server();
@@ -45,11 +48,35 @@ class Server
                 // Get a stream object for reading and writing
                 stream = client.GetStream();
 
-                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                jsondata = ReadObject();
 
-                clientThread.Start(client);
+                if (jsondata.GetValue("id").ToString() == "doctor")
+                {
+                    doctorstream = stream;
+                    Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
+
+                    doctorThread.Start(client);
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
+
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: Acknowledged");
+                }
+            
+                else if (jsondata.GetValue("id").ToString() == "client")
+                {
+                    clientstream = stream;
+                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+
+                    clientThread.Start(client);
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
+
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: Acknowledged");
+                }
             }
-
+            
 
         }
         catch (SocketException e)
@@ -69,50 +96,60 @@ class Server
 
     private void HandleClientComm(object client)
     {
-        int i;
         Byte[] bytes = new Byte[256];
         data = null;
         // Process the data sent by the client.
-        while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+        while (true)
         {
-            data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-            Console.WriteLine("Received: {0}", data);
+            jsondata = ReadObject();
+            
+            //SaveData(JsonConvert.SerializeObject(data));
+
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
+
+            // Send back a response.
+            clientstream.Write(msg, 0, msg.Length);
+            Console.WriteLine("Sent: Acknowledged");
+
+        }
+    }
+    private void HandleDoctorComm(object client)
+    {
+        Byte[] bytes = new Byte[256];
+        data = null;
+        // Process the data sent by the client.
+        while (true)
+        {
+            jsondata = ReadObject();
 
             //SaveData(JsonConvert.SerializeObject(data));
 
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes($"Received: {data}");
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes("ACK");
 
             // Send back a response.
-            stream.Write(msg, 0, msg.Length);
-            Console.WriteLine("Sent: {0}", "Acknowledged");
+            doctorstream.Write(msg, 0, msg.Length);
+            Console.WriteLine("Sent: Acknowledged");
 
-            if (data == "quit")
+            if (jsondata.GetValue("id").ToString() == "doctor/chat")
             {
-                break;
-            }
-            else if (data == "doctor")
-            {
-                Thread doctorThread = new Thread(new ThreadStart(HandleDoctor));
-                doctorThread.Start();
+                string message = JsonConvert.SerializeObject(jsondata);
+
+                byte[] prefix = BitConverter.GetBytes(message.Length);
+                byte[] request = Encoding.Default.GetBytes(message);
+
+                byte[] buffer = new Byte[prefix.Length + message.Length];
+                prefix.CopyTo(buffer, 0);
+                request.CopyTo(buffer, prefix.Length);
+
+                clientstream.Write(buffer, 0, buffer.Length);
+                
             }
             else if (data == "client")
             {
-                Thread patientThread = new Thread(new ThreadStart(HandleClient));
-                patientThread.Start();
+
 
             }
         }
-    }
-
-    private void HandleDoctor()
-    {
-
-    }
-
-    private void HandleClient()
-    {
-        SendObject(data);
-        SaveData(data);
     }
 
     public JObject ReadObject()
