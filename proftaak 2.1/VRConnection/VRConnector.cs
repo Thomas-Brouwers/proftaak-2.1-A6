@@ -14,8 +14,7 @@ namespace VRconnection
         string destination;
         TcpClient client;
         Stream stream;
-        int lenght;
-        int totalReceived = 0;
+      
         byte[] buffer;
 
         static void Main(string[] args)
@@ -30,7 +29,6 @@ namespace VRconnection
                 client = new TcpClient();
                 client.Connect("145.48.6.10", 6666);
                 stream = client.GetStream();
-                Application.Run(new VRForm2(this));
 
             }
             catch (ArgumentNullException e)
@@ -81,19 +79,37 @@ namespace VRconnection
 
         public JObject readObject()
         {
+            int totalReceived = 0;
             byte[] preBuffer = new Byte[4];
             stream.Read(preBuffer, 0, 4);
             int lenght = BitConverter.ToInt32(preBuffer, 0);
-            byte[] buffer = new Byte[lenght];
-            while (totalReceived < lenght)
+            if (lenght != 0)
             {
-                int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
-                totalReceived += receivedCount;
+                byte[] buffer = new Byte[lenght];
+                while (totalReceived < lenght)
+                {
+                    int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+                    totalReceived += receivedCount;
+                }
+                JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+                return Json;
             }
-            JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
-            totalReceived = 0;
-            return Json;
+            else
+            {
+                dynamic toJson = new
+                {
+                    data = new
+                    {
+                        data = new
+                        {
+                            id = "nothingHere"
+                        }
+                    }
+                };
+                return toJson;
+            }
         }
+
 
         public void getClientInfo()
         {

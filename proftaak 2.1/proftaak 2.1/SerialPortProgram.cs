@@ -18,9 +18,9 @@ namespace proftaak_2._1
             Console.WriteLine("Incoming Data");
             serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataRecieved);
             serialPort.Open();
-            serialPort.WriteLine("rs");
-            Thread.Sleep(10000);
-            Application.Run(new Form1(this));
+           // serialPort.WriteLine("rs");
+            Thread.Sleep(10);
+            //Application.Run(new Form1(this));
         }
 
         private void serialPort_DataRecieved(object sender, SerialDataReceivedEventArgs e)
@@ -32,7 +32,6 @@ namespace proftaak_2._1
         {
             serialPort.WriteLine("st");
             string data = serialPort.ReadLine();
-            Console.WriteLine(data);
             data2 = data.Split('\t');
             return data2;
         }

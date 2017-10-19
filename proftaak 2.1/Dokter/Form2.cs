@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Clientside;
 
 namespace Dokter
 {
@@ -33,7 +34,7 @@ namespace Dokter
         {
             username = textBox1.Text;
             password = textBox2.Text;
-            if (username == "doctor" && password == "password")
+            if (textBox1.Text == "doctor" && textBox2.Text == "password")
             {
                 if (comboBox1.SelectedIndex == 0)
                 {

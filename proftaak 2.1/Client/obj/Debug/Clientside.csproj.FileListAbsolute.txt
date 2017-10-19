@@ -28,3 +28,5 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug\Clientside.csproj.CoreCompileInputs.cache
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug\Client.exe
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug\Client.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Clientside.Login.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Clientside.csproj.GenerateResource.Cache

@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Clientside
 {
@@ -12,66 +13,82 @@ namespace Clientside
     class Client
     {
         private static System.Timers.Timer timer;
-        SerialPortProgram spp;
+        FakeData spp;
         VRConnector vr;
         string[] bycicleData;
         VRCommands commands;
-        string HUDUuid, ChatUuid;
-        JArray scene, sessionList;
+        string HUDUuid, chatUuid, routeUuid, cameraUuid;
+        JArray sessionList;
 
-        static void Main(string[] args)
-        {
-            new Client();
-        }
+
 
         public Client() {
-            //spp = new SerialPortProgram("COM3");
+
             vr = new VRConnector();
             commands = new VRCommands(vr);
             vr.getClientInfo();
 
             sessionList = commands.refreshConnection(vr.readObject());
             commands.connectClient(sessionList);
-            vr.Destination = vr.readObject().GetValue("data").ToObject<JObject>().GetValue("id").ToString();
+            vr.Destination = vr.readObject().SelectToken("data").SelectToken("id").ToString();
             Thread readerThread = new Thread(reading);
             readerThread.Start();
+            commands.createPanel("hud");
+            commands.route();
+            commands.find("Camera");
+            //commands.find("chat");
 
-            commands.load("Brain.json");
-            commands.find("hud");
-            commands.find("chat");
+            spp = new FakeData();
+
+            Thread.Sleep(200);
+
+            commands.follow(routeUuid, HUDUuid);
+            commands.update(HUDUuid, cameraUuid);
+
+            clientStart();
         }
 
-        public void clientStart() {
+        public void clientStart()
+        {
+            Console.WriteLine(HUDUuid);
             timer = new System.Timers.Timer(1000);
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = true;
-            timer.Enabled = true;
-            timer.Start();
-           
+                timer.Elapsed += OnTimedEvent;
+                timer.AutoReset = true;
+                timer.Enabled = true;
+                timer.Start();
         }
 
         private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            bycicleData = spp.update();
-            commands.HUD(bycicleData, HUDUuid);
+            string[] newBycicleData = spp.update();
+            if (newBycicleData.Length > 6)
+            {
+                bycicleData = newBycicleData;
+                commands.HUD(bycicleData, HUDUuid);
+                commands.speed(bycicleData[2], HUDUuid);
+            }
         }
 
         public void reading()
         {
             while (true)
             {
+                Thread.Sleep(1);
                 try
                 {
-                    JObject Json = vr.readObject().SelectToken("data").SelectToken("data").ToObject<JObject>();
+                    JObject Json = vr.readObject();
                     Console.WriteLine(Json);
-                    string id = Json.GetValue("id").ToString();
+                    JToken token = Json.SelectToken("data").SelectToken("data");
+                    string id = token.SelectToken("id").ToString();
                     switch (id)
                     {
-                        case "session/list": commands.connectClient(Json.GetValue("data").ToObject<JArray>()); break;
-                        case "tunnel/create": vr.Destination = vr.readObject().GetValue("data").ToObject<JObject>().GetValue("id").ToString(); break;
-                        case "scene/node/find": nodeFound(Json); break;
+                        case "session/list": commands.connectClient(token.SelectToken("data").ToObject<JArray>()); break;
+                        case "tunnel/create": vr.Destination = vr.readObject().SelectToken("data").SelectToken("id").ToString(); break;
+                        case "route/add": routeUuid = token.SelectToken("data").SelectToken("uuid").ToString(); break;
+                        case "scene/node/find":nodeFound(token.SelectToken("data").ToObject<JArray>()); break;
+                        case "scene/node/add": nodeAdded(token.SelectToken("data")); break;
                         case "scene/skybox/settime": break;
-                        case "notReady": break;
+                        case "nothingHere": break;
                         default: break;
                     }
                 }
@@ -82,11 +99,24 @@ namespace Clientside
             }
         }
 
-        public void nodeFound(JObject Json) {
-            JObject node = Json.GetValue("data").ToObject<JObject>();
-            switch (node.GetValue("name").ToString()) {
-                case "hud": HUDUuid = node.GetValue("uuid").ToString(); break;
-                case "chat": ChatUuid = node.GetValue("uuid").ToString(); break;
+        public void nodeAdded(JToken node) {
+            switch (node.SelectToken("name").ToString()) {
+                case "hud": HUDUuid = node.SelectToken("uuid").ToString(); break;
+                case "chat": chatUuid = node.SelectToken("uuid").ToString(); break;
+                case "Camera": cameraUuid = node.SelectToken("uuid").ToString(); break;
+                default: break;
+            }
+        }
+
+        public void nodeFound(JArray data)
+        {
+            IEnumerator<JToken> enumerator = data.GetEnumerator();
+            enumerator.MoveNext();
+            JToken node = enumerator.Current;
+            switch (node.SelectToken("name").ToString())
+            {
+                case "Camera": cameraUuid = node.SelectToken("uuid").ToString(); break;
+                default: break;
             }
         }
     }

@@ -18,7 +18,8 @@ namespace VRconnection
             vrConnector = vr;
             //spp = new SerialPortProgram("Simulator");
             InitializeComponent();
-            //data = vrConnector.getClientInfo();
+            vrConnector.getClientInfo();
+            data = vrConnector.ClientInfo();
             IEnumerator<JToken> enumerator = data.GetEnumerator();
             enumerator.MoveNext();
             for (int i = 0; i < data.Count; i++)
@@ -162,14 +163,14 @@ namespace VRconnection
                 {
                     nodes = new[] {
 
-                        new {   pos = new[] { 0, 0, 0 }, dir = new[] { -10, 0, 10} },
-                        new {   pos = new[] { 0, 1, 10 }, dir = new[] { 10, 2, 10} },
-                        new {   pos = new[] { 10, 2, 10 }, dir = new[] { 10, 2, -10} },
-                        new {   pos = new[] { 10, 3, 0 }, dir = new[] { -10, 0, -10} },
-                        new {   pos = new[] { 0, 3, 0 }, dir = new[] { -10, 0, 10} },
-                        new {   pos = new[] { -10, 3, 0 }, dir = new[] { -10, 0, -10} },
+                        new {   pos = new[] { 0, 0, 0 },    dir = new[] { -10, 0, 10} },
+                        new {   pos = new[] { 0, 1, 10 },   dir = new[] { 10, 2, 10} },
+                        new {   pos = new[] { 10, 2, 10 },  dir = new[] { 10, 2, -10} },
+                        new {   pos = new[] { 10, 3, 0 },   dir = new[] { -10, 0, -10} },
+                        new {   pos = new[] { 0, 3, 0 },    dir = new[] { -10, 0, 10} },
+                        new {   pos = new[] { -10, 3, 0 },  dir = new[] { -10, 0, -10} },
                         new {   pos = new[] { -10, 2, -10 }, dir = new[] { 10, -2, -10} },
-                        new {   pos = new[] { 0, 1, -10 }, dir = new[] { 10, -2, 10} },
+                        new {   pos = new[] { 0, 1, -10 },  dir = new[] { 10, -2, 10} },
                     }
                 }
             };
@@ -333,11 +334,6 @@ namespace VRconnection
                         scale = 1.0,
                         rotation = new[] { 0, 0, 0 },
                     }
-                    //animation = new
-                    //{
-                    //    name = "walk",
-                    //    speed = 0.5
-                    //}
                 }
             };
             vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));

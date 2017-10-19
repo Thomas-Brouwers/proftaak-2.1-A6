@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dokter.Properties
+namespace Clientside.Properties
 {
 
 

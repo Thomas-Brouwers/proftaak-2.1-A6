@@ -26,3 +26,13 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\obj\Debug
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\obj\Debug\Dokter.pdb
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\bin\Debug\Newtonsoft.Json.dll
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.csprojResolveAssemblyReference.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.Form1.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.Form2.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.Form3.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.Form4.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.Properties.Resources.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.csproj.CoreCompileInputs.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.pdb
