@@ -166,7 +166,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(106, 9);
+            this.label7.Location = new System.Drawing.Point(106, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 13);
             this.label7.TabIndex = 3;
@@ -513,6 +513,7 @@
             this.button11.TabIndex = 22;
             this.button11.Text = "stop sessie";
             this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // Form1
             // 

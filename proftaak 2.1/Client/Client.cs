@@ -15,6 +15,7 @@ namespace Clientside
     {
         private static System.Timers.Timer timer;
         SerialPortProgram spp;
+        FakeData fd;
         VRConnector vr;
         string[] bycicleData;
         VRCommands commands;
@@ -32,6 +33,8 @@ namespace Clientside
             Thread connectionThread = new Thread(connector);
             connectionThread.Start();
             //spp = new SerialPortProgram("COM3");
+            fd = new FakeData();
+            clientStart();
             vr = new VRConnector();
             commands = new VRCommands(vr);
             vr.getClientInfo();
@@ -55,22 +58,32 @@ namespace Clientside
             timer.AutoReset = true;
             timer.Enabled = true;
             timer.Start();
-           
+
+            
+
         }
 
         private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            bycicleData = spp.update();
-            commands.HUD(bycicleData, HUDUuid);
 
+            bycicleData = fd.update();
+            //commands.HUD(bycicleData, HUDUuid);
             dynamic toJson = new
             {
                 id = "client/data",
                 data = new
                 {
-                    bycicleData
+                    pulse = bycicleData[0],
+                    rpm = bycicleData[1],
+                    speed = bycicleData[2],
+                    distance = bycicleData[3],
+                    requestedPower = bycicleData[4],
+                    energy = bycicleData[5],
+                    elapsedTime = bycicleData[6],
+                    actualPower = bycicleData[7]
                 }
             };
+            Console.WriteLine(toJson);
             string message = JsonConvert.SerializeObject(toJson);
             byte[] prefix = BitConverter.GetBytes(message.Length);
             byte[] request = Encoding.Default.GetBytes(message);
@@ -78,7 +91,7 @@ namespace Clientside
             byte[] buffer = new Byte[prefix.Length + message.Length];
             prefix.CopyTo(buffer, 0);
             request.CopyTo(buffer, prefix.Length);
-
+            
             stream.Write(buffer, 0, buffer.Length);
         }
 

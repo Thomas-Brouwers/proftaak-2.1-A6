@@ -67,7 +67,7 @@ namespace Dokter
 
         private void chart1_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label18_Click(object sender, EventArgs e)
@@ -88,14 +88,29 @@ namespace Dokter
 
         private void button10_Click(object sender, EventArgs e)
         {
-            
+            started = true;
+            Console.WriteLine("started");
         }
 
 
         private void update(JObject Json)
         {
-                Console.WriteLine(Json);
+            if (started) { 
+            Console.WriteLine("update");
+            MethodInvoker mi = delegate {
+                label7.Text = Json.GetValue("data").ToObject<JObject>().GetValue("pulse").ToString();
+                label9.Text = Json.GetValue("data").ToObject<JObject>().GetValue("rpm").ToString();
+                label3.Text = Json.GetValue("data").ToObject<JObject>().GetValue("speed").ToString();
+                label5.Text = Json.GetValue("data").ToObject<JObject>().GetValue("distance").ToString();
+                label15.Text = Json.GetValue("data").ToObject<JObject>().GetValue("requestedPower").ToString();
+                label13.Text = Json.GetValue("data").ToObject<JObject>().GetValue("energy").ToString();
+                label11.Text = Json.GetValue("data").ToObject<JObject>().GetValue("elapsedTime").ToString();
+                label17.Text = Json.GetValue("data").ToObject<JObject>().GetValue("actualPower").ToString();
+            };
+            if (InvokeRequired)
+                this.Invoke(mi);
         }
+    }
 
         public void ConnectionHandler()
         {
@@ -133,24 +148,26 @@ namespace Dokter
                 stream.Write(buffer, 0, buffer.Length);
                 while (true)
                 {
-                    byte[] preBuffer = new Byte[4];
-                    stream.Read(preBuffer, 0, 4);
-                    int lenght = BitConverter.ToInt32(preBuffer, 0);
-                    buffer = new Byte[lenght];
-                    int totalReceived = 0;
-                    while (totalReceived < lenght)
-                    {
-                        int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
-                        totalReceived += receivedCount;
-                    }
-                    JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+                        byte[] preBuffer = new Byte[4];
+                        stream.Read(preBuffer, 0, 4);
+                        int lenght = BitConverter.ToInt32(preBuffer, 0);
+                        buffer = new Byte[lenght];
+                        int totalReceived = 0;
+                        while (totalReceived < lenght)
+                        {
+                            int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+                            totalReceived += receivedCount;
+                        }
+                        JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
 
-                    string id = Json.GetValue("id").ToString();
-                    switch (id)
-                    {
-                        case "client/data": update(Json); break;
+                        string id = Json.GetValue("id").ToString();
+                        switch (id)
+                        {
+                            case "client/data":update(Json); break;
+                        }
                     }
-                }
+                
+                Console.WriteLine("dit mag niet gebeuren");
 
 
             }
@@ -162,6 +179,11 @@ namespace Dokter
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            started = false;
         }
     }
 }

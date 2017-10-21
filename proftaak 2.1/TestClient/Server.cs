@@ -13,6 +13,7 @@ class Server
     NetworkStream doctorstream;
     NetworkStream clientstream;
     string data;
+    bool doctorexists = false;
     JObject jsondata;
     public static void Main()
     {
@@ -56,20 +57,20 @@ class Server
                     Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
 
                     doctorThread.Start(client);
-                    
+                    doctorexists = true;
                 }
-            
-                else if (jsondata.GetValue("id").ToString() == "client")
+                if (jsondata.GetValue("id").ToString() == "client")
                 {
+                    while (!doctorexists) { }
                     clientstream = stream;
                     Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
                     clientThread.Start(client);
-                    
+
+
                 }
             }
             
-
         }
         catch (SocketException e)
         {
@@ -93,23 +94,24 @@ class Server
         // Process the data sent by the client.
         while (true)
         {
-            jsondata = ReadObject();
-            
-            //SaveData(JsonConvert.SerializeObject(data));
+            {
+                jsondata = ReadObject();
 
-            
+                //SaveData(JsonConvert.SerializeObject(data));
 
-            string message = JsonConvert.SerializeObject(jsondata);
 
-            byte[] prefix = BitConverter.GetBytes(message.Length);
-            byte[] request = Encoding.Default.GetBytes(message);
 
-            byte[] buffer = new Byte[prefix.Length + message.Length];
-            prefix.CopyTo(buffer, 0);
-            request.CopyTo(buffer, prefix.Length);
+                string message = JsonConvert.SerializeObject(jsondata);
 
-            doctorstream.Write(buffer, 0, buffer.Length);
+                byte[] prefix = BitConverter.GetBytes(message.Length);
+                byte[] request = Encoding.Default.GetBytes(message);
 
+                byte[] buffer = new Byte[prefix.Length + message.Length];
+                prefix.CopyTo(buffer, 0);
+                request.CopyTo(buffer, prefix.Length);
+                
+                doctorstream.Write(buffer, 0, buffer.Length);
+            }
         }
     }
     private void HandleDoctorComm(object client)
@@ -119,9 +121,10 @@ class Server
         // Process the data sent by the client.
         while (true)
         {
-            jsondata = ReadObject();
+            {
+                jsondata = ReadObject();
 
-            
+
 
                 string message = JsonConvert.SerializeObject(jsondata);
 
@@ -133,7 +136,7 @@ class Server
                 request.CopyTo(buffer, prefix.Length);
 
                 clientstream.Write(buffer, 0, buffer.Length);
-             
+            }
         }
     }
 
