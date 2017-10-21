@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -18,6 +19,8 @@ namespace Dokter
     {
         NetworkStream stream;
         bool started = false;
+        string jsonData;
+        Data data;
         public Form1()
         {
             Thread connection = new Thread(ConnectionHandler);
@@ -97,7 +100,8 @@ namespace Dokter
         {
             if (started) { 
             Console.WriteLine("update");
-            MethodInvoker mi = delegate {
+            MethodInvoker mi = delegate
+            {
                 label7.Text = Json.GetValue("data").ToObject<JObject>().GetValue("pulse").ToString();
                 label9.Text = Json.GetValue("data").ToObject<JObject>().GetValue("rpm").ToString();
                 label3.Text = Json.GetValue("data").ToObject<JObject>().GetValue("speed").ToString();
@@ -106,6 +110,29 @@ namespace Dokter
                 label13.Text = Json.GetValue("data").ToObject<JObject>().GetValue("energy").ToString();
                 label11.Text = Json.GetValue("data").ToObject<JObject>().GetValue("elapsedTime").ToString();
                 label17.Text = Json.GetValue("data").ToObject<JObject>().GetValue("actualPower").ToString();
+                
+                data = new Data(label7.Text,
+            label9.Text,
+            label3.Text,
+            label5.Text,
+            label15.Text,
+            label13.Text,
+            label11.Text,
+            label17.Text);
+
+                TextWriter writer = null;
+                try
+                {
+                    var contentsToWriteToFile = JsonConvert.SerializeObject(data);
+                    writer = new StreamWriter("data.dat", false);
+                    writer.Write(contentsToWriteToFile);
+                }
+                finally
+                {
+                    if (writer != null)
+                        writer.Close();
+                }
+
             };
             if (InvokeRequired)
                 this.Invoke(mi);
@@ -166,8 +193,7 @@ namespace Dokter
                             case "client/data":update(Json); break;
                         }
                     }
-                
-                Console.WriteLine("dit mag niet gebeuren");
+               
 
 
             }
@@ -184,6 +210,8 @@ namespace Dokter
         private void button11_Click(object sender, EventArgs e)
         {
             started = false;
+            
+
         }
     }
 }
