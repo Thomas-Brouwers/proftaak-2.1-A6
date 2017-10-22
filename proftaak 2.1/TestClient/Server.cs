@@ -9,7 +9,7 @@ using System.Threading;
 
 class Server
 {
-    NetworkStream stream;
+    
     NetworkStream doctorstream;
     NetworkStream clientstream;
     string data;
@@ -47,9 +47,9 @@ class Server
                 Console.WriteLine("Connected!");
 
                 // Get a stream object for reading and writing
-                stream = client.GetStream();
+                NetworkStream stream = client.GetStream();
 
-                jsondata = ReadObject();
+                jsondata = ReadObject(stream);
 
                 if (jsondata.GetValue("id").ToString() == "doctor")
                 {
@@ -94,20 +94,9 @@ class Server
         // Process the data sent by the client.
         while (true)
         {
-            {
-                jsondata = ReadObject();
-                
-                string message = JsonConvert.SerializeObject(jsondata);
-
-                byte[] prefix = BitConverter.GetBytes(message.Length);
-                byte[] request = Encoding.Default.GetBytes(message);
-
-                byte[] buffer = new Byte[prefix.Length + message.Length];
-                prefix.CopyTo(buffer, 0);
-                request.CopyTo(buffer, prefix.Length);
-                
-                doctorstream.Write(buffer, 0, buffer.Length);
-            }
+                jsondata = ReadObject(clientstream);
+                Console.WriteLine(jsondata);
+                SendObject(JsonConvert.SerializeObject(jsondata), doctorstream);
         }
     }
     private void HandleDoctorComm(object client)
@@ -117,51 +106,54 @@ class Server
         // Process the data sent by the client.
         while (true)
         {
-            {
-                jsondata = ReadObject();
-
-
-
-                string message = JsonConvert.SerializeObject(jsondata);
-
-                byte[] prefix = BitConverter.GetBytes(message.Length);
-                byte[] request = Encoding.Default.GetBytes(message);
-
-                byte[] buffer = new Byte[prefix.Length + message.Length];
-                prefix.CopyTo(buffer, 0);
-                request.CopyTo(buffer, prefix.Length);
-
-                clientstream.Write(buffer, 0, buffer.Length);
-            }
+                jsondata = ReadObject(doctorstream);
+                Console.WriteLine(jsondata);
+                SendObject(JsonConvert.SerializeObject(jsondata), clientstream);
         }
     }
 
-    public JObject ReadObject()
+    public JObject ReadObject(NetworkStream stream)
     {
-        byte[] preBuffer = new Byte[4];
-        stream.Read(preBuffer, 0, 4);
-        int lenght = BitConverter.ToInt32(preBuffer, 0);
-        byte[] buffer = new Byte[lenght];
-        int totalReceived = 0;
-        while (totalReceived < lenght)
+        try
         {
-            int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
-            totalReceived += receivedCount;
+            byte[] preBuffer = new Byte[4];
+            stream.Read(preBuffer, 0, 4);
+            int lenght = BitConverter.ToInt32(preBuffer, 0);
+            byte[] buffer = new Byte[lenght];
+            int totalReceived = 0;
+            while (totalReceived < lenght)
+            {
+                int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+                totalReceived += receivedCount;
+            }
+            Console.WriteLine(Encoding.UTF8.GetString(buffer));
+            JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+            Console.WriteLine(Json);
+            return Json;
         }
-        JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
-        Console.WriteLine(Json);
-        return Json;
+        catch (Exception e)
+        {
+            Console.WriteLine(e.StackTrace);
+            return null;
+        }
     }
     
-    public void SendObject(string message)
+    public void SendObject(string message, NetworkStream stream)
     {
-        byte[] prefix = BitConverter.GetBytes(message.Length);
-        byte[] request = Encoding.Default.GetBytes(message);
+        try
+        {
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
 
-        byte[] buffer = new Byte[prefix.Length + message.Length];
-        prefix.CopyTo(buffer, 0);
-        request.CopyTo(buffer, prefix.Length);
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
 
-        stream.Write(buffer, 0, buffer.Length);
+            stream.Write(buffer, 0, buffer.Length);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.StackTrace);
+        }
     }
 }
