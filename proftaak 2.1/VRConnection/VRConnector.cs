@@ -14,6 +14,7 @@ namespace VRconnection
         string destination;
         TcpClient client;
         Stream stream;
+        JObject nothingHere;
       
         byte[] buffer;
 
@@ -39,6 +40,18 @@ namespace VRconnection
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+
+            dynamic toJson = new
+            {
+                data = new
+                {
+                    data = new
+                    {
+                        id = "nothingHere"
+                    }
+                }
+            };
+            nothingHere = toJson;
         }
 
         public void send(string message)
@@ -96,17 +109,7 @@ namespace VRconnection
             }
             else
             {
-                dynamic toJson = new
-                {
-                    data = new
-                    {
-                        data = new
-                        {
-                            id = "nothingHere"
-                        }
-                    }
-                };
-                return toJson;
+                return nothingHere;
             }
         }
 

@@ -11,23 +11,19 @@ namespace VRconnection
 {
     public class VRCommands
     {
-
+        JObject chatClear, chatSwap, bycicleClear, bycicleSwap;
+        string HUDUuid, chatUuid;
         VRConnector vrConnector;
-        public VRCommands(VRConnector vr) {
+
+        public VRCommands(VRConnector vr)
+        {
             vrConnector = vr;
+
         }
 
         public void HUD(string[] bycicleData, string HUDUuid)
         {
-            dynamic toJsonClear = new
-            {
-                id = "scene/panel/clear",
-                data = new
-                {
-                    id = HUDUuid
-                }
-            };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonClear)));
+            vrConnector.sendJson(bycicleClear);
 
             Thread.Sleep(50);
             string displayText;
@@ -70,21 +66,39 @@ namespace VRconnection
                     {
                         id = HUDUuid,
                         text = displayText,
-                        position = new[] { 100 * (i / 4) + 50, 100.0 * (i % 4) + 150 },
+                        position = new[] { 150 * (i / 4) + 50, 100.0 * (i % 4) + 150 },
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
-                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonText)));
+                vrConnector.sendJson(toJsonText);
             }
-                dynamic toJsonSwap = new
+
+            vrConnector.sendJson(bycicleSwap);
+        }
+
+        public void chat(string[] chat, string chatUuid)
+        {
+
+           
+            vrConnector.sendJson(chatClear);
+
+            for (int i = 0; i < chat.Length; i++)
+            {
+                dynamic toJsonText = new
                 {
-                    id = "scene/panel/swap",
+                    id = "scene/panel/drawtext",
                     data = new
                     {
-                        id = HUDUuid
+                        id = chatUuid,
+                        text = chat[i],
+                        position = new[] { 50, 100.0 * (i % 4) + 50 },
+                        color = new[] { 0, 0, 0, 1 }
                     }
                 };
-                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonSwap)));
+                vrConnector.sendJson(toJsonText);
+            }
+
+            vrConnector.sendJson(chatSwap);
         }
 
         public void load(string filename)
@@ -98,7 +112,7 @@ namespace VRconnection
 
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
         }
 
         public void find(string item)
@@ -111,7 +125,7 @@ namespace VRconnection
                     name = item
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
         }
 
         public void getClients()
@@ -181,7 +195,7 @@ namespace VRconnection
                     }
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
         }
 
 
@@ -202,7 +216,7 @@ namespace VRconnection
                     positionOffset = new[] { 0, 0, 0 }
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
         }
 
         public void speed(string speed, string paneUuid)
@@ -217,7 +231,7 @@ namespace VRconnection
                     speed = newSpeed,
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
         }
 
         public void createPanel(string panelName)
@@ -245,7 +259,7 @@ namespace VRconnection
                     }
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
         }
 
         public void update(string parent, string child)
@@ -265,7 +279,56 @@ namespace VRconnection
                     }
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
+        }
+
+        public void setHUDUuid(string huduuid)
+        {
+            HUDUuid = huduuid;
+            dynamic toJson = new
+            {
+                id = "scene/panel/clear",
+                data = new
+                {
+                    id = HUDUuid
+                }
+            };
+            bycicleClear = toJson;
+            dynamic toJsonSwap = new
+            {
+                id = "scene/panel/swap",
+                data = new
+                {
+                    id = HUDUuid
+                }
+            };
+            bycicleSwap = toJsonSwap;
+
+        }
+
+        public void setChatUuid(string chatUuid)
+        {
+            this.chatUuid = chatUuid;
+
+            dynamic toJson = new
+            {
+                id = "scene/panel/clear",
+                data = new
+                {
+                    id = chatUuid
+                }
+            };
+            chatClear = toJson;
+
+            dynamic toJsonSwap = new
+            {
+                id = "scene/panel/swap",
+                data = new
+                {
+                    id = chatUuid
+                }
+            };
+            chatSwap = toJsonSwap;
         }
     }
 }

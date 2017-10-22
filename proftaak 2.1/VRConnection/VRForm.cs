@@ -69,7 +69,7 @@ namespace VRconnection
                     time = selectedTime
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+            vrConnector.sendJson(toJson);
             Console.WriteLine(vrConnector.readObject());
         }
 
