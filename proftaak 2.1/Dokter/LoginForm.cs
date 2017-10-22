@@ -10,40 +10,27 @@ using System.Windows.Forms;
 
 namespace Dokter
 {
-    public partial class Form2 : Form
+    public partial class LoginForm : Form
     {
         string username;
         string password;
-        public Form2()
+        public LoginForm()
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
+        private void LoginBT_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            username = textBox1.Text;
-            password = textBox2.Text;
-            if (username == "doctor" && password == "password")
+            if (UserTB.Text == "doctor" && PasswordTB.Text == "password")
             {
                 if (comboBox1.SelectedIndex == 0)
                 {
-                    Form1 form1 = new Form1();
+                    DataForm form1 = new DataForm();
                     form1.Show();
                     this.Close();
                 }
                 else
                 {
-                    Form4 form4 = new Form4();
+                    HistoryForm form4 = new HistoryForm();
                     form4.Show();
                     this.Close();
                 }

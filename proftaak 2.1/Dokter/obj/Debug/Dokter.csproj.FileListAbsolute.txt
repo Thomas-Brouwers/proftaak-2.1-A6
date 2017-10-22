@@ -26,3 +26,18 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\obj\Debug
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\obj\Debug\Dokter.pdb
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\bin\Debug\Newtonsoft.Json.dll
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Dokter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\bin\Debug\Dokter.exe.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\bin\Debug\Dokter.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\bin\Debug\Dokter.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.csprojResolveAssemblyReference.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.Properties.Resources.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.csproj.GenerateResource.Cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.csproj.CoreCompileInputs.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.DataForm.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.LoginForm.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.ChatForm.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Dokter\obj\Debug\Dokter.HistoryForm.resources

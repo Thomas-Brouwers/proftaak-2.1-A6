@@ -13,10 +13,10 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Dokter
 {
-    public partial class Form4 : Form
+    public partial class HistoryForm : Form
     {
         List<Data> dataList;
-        public Form4()
+        public HistoryForm()
         {
             InitializeComponent();
         }
@@ -30,19 +30,22 @@ namespace Dokter
                 dataList = (List<Data>)bformatter.Deserialize(stream);
             }
 
-                label7.Text = dataList[0].pulse;
-                label9.Text = dataList[0].rpm;
-                label3.Text = dataList[0].speed;
-                label5.Text = dataList[0].distance;
-                label15.Text = dataList[0].requestedPower;
-                label13.Text = dataList[0].energy;
-                label11.Text = dataList[0].elapsedTime;
-                label17.Text = dataList[0].actualpower;
+                PulseLB.Text = dataList[0].pulse;
+                RPMLB.Text = dataList[0].rpm;
+                SpeedLB.Text = dataList[0].speed;
+                DistanceLB.Text = dataList[0].distance;
+                RequestedPowerLB.Text = dataList[0].requestedPower;
+                EnergyLB.Text = dataList[0].energy;
+                ElepsedTimeLB.Text = dataList[0].elapsedTime;
+                ActualPowerLB.Text = dataList[0].actualpower;
 
-                chart1.DataSource = dataList.ToString();
-                chart1.Series["Pulse"].XValueMember = "elapsedTime";
-                chart1.Series["Pulse"].YValueMembers = "pulse";
-            chart1.DataBind();
+
+                
+
+                HistroyChart.DataSource = dataList.ToString();
+                HistroyChart.Series["Pulse"].XValueMember = "elapsedTime";
+                HistroyChart.Series["Pulse"].YValueMembers = "pulse";
+                HistroyChart.DataBind();
             
         }
     }
