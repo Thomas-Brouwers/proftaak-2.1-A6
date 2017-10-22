@@ -70,6 +70,7 @@ namespace Clientside
 
             Thread.Sleep(200);
 
+            commands.addRoad(routeUuid);
             commands.follow(routeUuid, HUDUuid);
             commands.update(HUDUuid, cameraUuid);
             commands.update(HUDUuid, chatUuid);

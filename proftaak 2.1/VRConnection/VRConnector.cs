@@ -51,7 +51,7 @@ namespace VRconnection
                     }
                 }
             };
-            nothingHere = toJson;
+            nothingHere = JObject.Parse(JsonConvert.SerializeObject(toJson));
         }
 
         public void send(string message)

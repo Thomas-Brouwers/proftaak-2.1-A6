@@ -70,7 +70,7 @@ namespace VRconnection
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
-                vrConnector.sendJson(toJsonText);
+                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonText)));
             }
 
             vrConnector.sendJson(bycicleSwap);
@@ -125,7 +125,7 @@ namespace VRconnection
                     name = item
                 }
             };
-            vrConnector.sendJson(toJson);
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
         public void getClients()
@@ -195,7 +195,7 @@ namespace VRconnection
                     }
                 }
             };
-            vrConnector.sendJson(toJson);
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
 
@@ -216,7 +216,7 @@ namespace VRconnection
                     positionOffset = new[] { 0, 0, 0 }
                 }
             };
-            vrConnector.sendJson(toJson);
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
         public void speed(string speed, string paneUuid)
@@ -231,7 +231,7 @@ namespace VRconnection
                     speed = newSpeed,
                 }
             };
-            vrConnector.sendJson(toJson);
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
         public void createPanel(string panelName)
@@ -259,7 +259,7 @@ namespace VRconnection
                     }
                 }
             };
-            vrConnector.sendJson(toJson);
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
         public void update(string parent, string child)
@@ -279,7 +279,7 @@ namespace VRconnection
                     }
                 }
             };
-            vrConnector.sendJson(toJson);
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
         public void setHUDUuid(string huduuid)
@@ -293,7 +293,7 @@ namespace VRconnection
                     id = HUDUuid
                 }
             };
-            bycicleClear = toJson;
+            bycicleClear = toJson.toObject<JObject>();
             dynamic toJsonSwap = new
             {
                 id = "scene/panel/swap",
@@ -302,7 +302,7 @@ namespace VRconnection
                     id = HUDUuid
                 }
             };
-            bycicleSwap = toJsonSwap;
+            bycicleSwap = toJsonSwap.toObject<JObject>();
 
         }
 
@@ -318,7 +318,7 @@ namespace VRconnection
                     id = chatUuid
                 }
             };
-            chatClear = toJson;
+            chatClear = toJson.toObject<JObject>();
 
             dynamic toJsonSwap = new
             {
@@ -328,7 +328,24 @@ namespace VRconnection
                     id = chatUuid
                 }
             };
-            chatSwap = toJsonSwap;
+            chatSwap = toJsonSwap.toObject<JObject>();
+        }
+
+        public void addRoad(string routeUuid)
+        {
+            dynamic toJson = new
+            {
+                id = "scene/road/add",
+                data = new
+                {
+                    route = routeUuid,
+                    diffuse = "data/NetworkEngine/textures/tarmac_diffuse.png",
+                    normal = "data/NetworkEngine/textures/tarmac_normale.png",
+                    specular = "data/NetworkEngine/textures/tarmac_specular.png",
+                    heightoffset = 0.01
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
     }
 }
