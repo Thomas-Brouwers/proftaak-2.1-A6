@@ -293,7 +293,7 @@ namespace VRconnection
                     id = HUDUuid
                 }
             };
-            bycicleClear = toJson.toObject<JObject>();
+            bycicleClear = JObject.Parse(JsonConvert.SerializeObject(toJson));
             dynamic toJsonSwap = new
             {
                 id = "scene/panel/swap",
@@ -302,7 +302,7 @@ namespace VRconnection
                     id = HUDUuid
                 }
             };
-            bycicleSwap = toJsonSwap.toObject<JObject>();
+            bycicleSwap = JObject.Parse(JsonConvert.SerializeObject(toJsonSwap));
 
         }
 
@@ -318,7 +318,7 @@ namespace VRconnection
                     id = chatUuid
                 }
             };
-            chatClear = toJson.toObject<JObject>();
+            chatClear = JObject.Parse(JsonConvert.SerializeObject(toJson));
 
             dynamic toJsonSwap = new
             {
@@ -328,7 +328,7 @@ namespace VRconnection
                     id = chatUuid
                 }
             };
-            chatSwap = toJsonSwap.toObject<JObject>();
+            chatSwap = JObject.Parse(JsonConvert.SerializeObject(toJsonSwap));
         }
 
         public void addRoad(string routeUuid)
