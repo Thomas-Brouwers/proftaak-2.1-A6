@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Dokter
 {
+    [Serializable]
     class Data
     {
-        public string pulse;
-        public string rpm;
-        public string speed;
-        public string distance;
-        public string requestedPower;
-        public string energy;
-        public string elapsedTime;
-        public string actualpower;
+        public String pulse;
+        public String rpm;
+        public String speed;
+        public String distance;
+        public String requestedPower;
+        public String energy;
+        public String elapsedTime;
+        public String actualpower;
 
-        public Data(string pulse, string rpm, string speed, string distance, string requestedPower, string energy, string elapsedTime, string actualpower)
+        public Data(String pulse, String rpm, String speed, String distance, String requestedPower, String energy, String elapsedTime, String actualpower)
         {
             this.pulse = pulse;
             this.rpm = rpm;

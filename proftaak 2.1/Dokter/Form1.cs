@@ -20,7 +20,7 @@ namespace Dokter
         NetworkStream stream;
         bool started = false;
         string jsonData;
-        Data data;
+        List<Data> dataList = new List<Data>();
         public Form1()
         {
             Thread connection = new Thread(ConnectionHandler);
@@ -93,6 +93,25 @@ namespace Dokter
         {
             started = true;
             Console.WriteLine("started");
+            /*dynamic toJson = new
+            {
+                id = "doctor/start",
+                data = new
+                {
+
+                }
+            };
+            string message = JsonConvert.SerializeObject(toJson);
+
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
+
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            stream.Write(buffer, 0, buffer.Length);
+            */
         }
 
 
@@ -110,29 +129,16 @@ namespace Dokter
                 label13.Text = Json.GetValue("data").ToObject<JObject>().GetValue("energy").ToString();
                 label11.Text = Json.GetValue("data").ToObject<JObject>().GetValue("elapsedTime").ToString();
                 label17.Text = Json.GetValue("data").ToObject<JObject>().GetValue("actualPower").ToString();
+               
                 
-                data = new Data(label7.Text,
+                dataList.Add(new Data(label7.Text,
             label9.Text,
             label3.Text,
             label5.Text,
             label15.Text,
             label13.Text,
             label11.Text,
-            label17.Text);
-
-                TextWriter writer = null;
-                try
-                {
-                    var contentsToWriteToFile = JsonConvert.SerializeObject(data);
-                    writer = new StreamWriter("data.dat", false);
-                    writer.Write(contentsToWriteToFile);
-                }
-                finally
-                {
-                    if (writer != null)
-                        writer.Close();
-                }
-
+            label17.Text));
             };
             if (InvokeRequired)
                 this.Invoke(mi);
@@ -210,8 +216,82 @@ namespace Dokter
         private void button11_Click(object sender, EventArgs e)
         {
             started = false;
-            
 
+            //serialize
+            using (Stream stream = File.Open("data.dat", FileMode.Create))
+            {
+                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                bformatter.Serialize(stream, dataList);
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("noodstop");
+            dynamic toJson = new
+            {
+                id = "doctor/noodstop",
+                 data = new
+                 {
+
+                 }
+            };
+            string message = JsonConvert.SerializeObject(toJson);
+
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
+
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            stream.Write(buffer, 0, buffer.Length);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            dynamic toJson = new
+            {
+                id = "doctor/powerup",
+                 data = new
+                 {
+
+                 }
+            };
+            string message = JsonConvert.SerializeObject(toJson);
+
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
+
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            stream.Write(buffer, 0, buffer.Length);
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            dynamic toJson = new
+            {
+                id = "doctor/powerdown",
+                 data = new
+                 {
+
+                 }
+            };
+            string message = JsonConvert.SerializeObject(toJson);
+
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
+
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            stream.Write(buffer, 0, buffer.Length);
         }
     }
 }

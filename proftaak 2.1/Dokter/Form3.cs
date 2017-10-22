@@ -30,7 +30,6 @@ namespace Dokter
                 id = "doctor/chat",
                 data = new
                 {
-                    dest = comboBox1.Text,
                     data = textBox1.Text
                 }
             };

@@ -32,9 +32,9 @@ namespace Clientside
 
             Thread connectionThread = new Thread(connector);
             connectionThread.Start();
+            clientStart();
             //spp = new SerialPortProgram("COM3");
             fd = new FakeData();
-            clientStart();
             vr = new VRConnector();
             commands = new VRCommands(vr);
             vr.getClientInfo();
@@ -183,7 +183,11 @@ namespace Clientside
                         switch (id)
                         {
                             case "doctor/chat": readChat(Json); break;
-                        }
+                            //case "doctor/start": clientStart(); break;
+                            case "doctor/noodstop": Environment.Exit(0); break;
+                            case "doctor/powerup": increasePower(); break;
+                            case "doctor/powerdown": decreasePower(); break;
+                    }
                     }
                 
 
@@ -196,6 +200,20 @@ namespace Clientside
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+        }
+
+        public void increasePower()
+        {
+
+            Console.WriteLine("increasePower");
+
+        }
+
+        public void decreasePower()
+        {
+
+            Console.WriteLine("decreasepower");
+
         }
     }
 }

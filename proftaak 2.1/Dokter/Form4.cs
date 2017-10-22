@@ -9,11 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Dokter
 {
     public partial class Form4 : Form
     {
+        List<Data> dataList;
         public Form4()
         {
             InitializeComponent();
@@ -21,27 +23,27 @@ namespace Dokter
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TextReader reader = null;
-            try
+            using (Stream stream = File.Open("data.dat", FileMode.Open))
             {
-                reader = new StreamReader("data.dat");
-                var fileContents = reader.ReadToEnd();
-                Data data = JsonConvert.DeserializeObject<Data>(fileContents);
+                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-                label7.Text = data.pulse;
-                label9.Text = data.rpm;
-                label3.Text = data.speed;
-                label5.Text = data.distance;
-                label15.Text = data.requestedPower;
-                label13.Text = data.energy;
-                label11.Text = data.elapsedTime;
-                label17.Text = data.actualpower;
+                dataList = (List<Data>)bformatter.Deserialize(stream);
             }
-            finally
-            {
-                if (reader != null)
-                    reader.Close();
-            }
+
+                label7.Text = dataList[0].pulse;
+                label9.Text = dataList[0].rpm;
+                label3.Text = dataList[0].speed;
+                label5.Text = dataList[0].distance;
+                label15.Text = dataList[0].requestedPower;
+                label13.Text = dataList[0].energy;
+                label11.Text = dataList[0].elapsedTime;
+                label17.Text = dataList[0].actualpower;
+
+                chart1.DataSource = dataList.ToString();
+                chart1.Series["Pulse"].XValueMember = "elapsedTime";
+                chart1.Series["Pulse"].YValueMembers = "pulse";
+            chart1.DataBind();
+            
         }
     }
 }

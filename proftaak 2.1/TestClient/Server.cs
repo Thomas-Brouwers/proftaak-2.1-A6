@@ -96,11 +96,7 @@ class Server
         {
             {
                 jsondata = ReadObject();
-
-                //SaveData(JsonConvert.SerializeObject(data));
-
-
-
+                
                 string message = JsonConvert.SerializeObject(jsondata);
 
                 byte[] prefix = BitConverter.GetBytes(message.Length);
@@ -156,26 +152,7 @@ class Server
         Console.WriteLine(Json);
         return Json;
     }
-
-    public void SaveData(string message)
-    {
-        using (StreamWriter file = File.CreateText("data.txt"))
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            //serialize object directly into file stream
-            serializer.Serialize(file, message);
-        }
-    }
-
-    public dynamic LoadData()
-    {
-        using (StreamReader file = File.OpenText("data.txt"))
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            return serializer.Deserialize(file, typeof(string));
-        }
-    }
-
+    
     public void SendObject(string message)
     {
         byte[] prefix = BitConverter.GetBytes(message.Length);
