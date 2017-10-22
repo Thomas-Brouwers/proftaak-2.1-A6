@@ -28,3 +28,22 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug\Clientside.csproj.CoreCompileInputs.cache
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug\Client.exe
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\Client\obj\Debug\Client.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Clientside.Login.resources
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\Client\obj\Debug\Clientside.csproj.GenerateResource.Cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\Client.exe.config
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\Client.exe
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\Client.pdb
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\ConsoleApp1.exe
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\Newtonsoft.Json.dll
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\proftaak 2.1.dll
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\proftaak 2.1.pdb
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\proftaak 2.1.dll.config
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\ConsoleApp1.pdb
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\ConsoleApp1.exe.config
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\bin\Debug\Newtonsoft.Json.xml
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\obj\Debug\Clientside.csprojResolveAssemblyReference.cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\obj\Debug\Clientside.Login.resources
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\obj\Debug\Clientside.csproj.GenerateResource.Cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\obj\Debug\Clientside.csproj.CoreCompileInputs.cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\obj\Debug\Client.exe
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\Client\obj\Debug\Client.pdb

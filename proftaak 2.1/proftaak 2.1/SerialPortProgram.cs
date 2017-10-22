@@ -18,9 +18,9 @@ namespace proftaak_2._1
             Console.WriteLine("Incoming Data");
             serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataRecieved);
             serialPort.Open();
-            serialPort.WriteLine("rs");
+            //serialPort.WriteLine("rs");
             Thread.Sleep(10000);
-            Application.Run(new Form1(this));
+            //Application.Run(new Form1(this));
         }
 
         private void serialPort_DataRecieved(object sender, SerialDataReceivedEventArgs e)

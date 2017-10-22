@@ -5,30 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace VRconnection
 {
     public class VRCommands
     {
-
+        JObject chatClear, chatSwap, bycicleClear, bycicleSwap;
+        string HUDUuid, chatUuid;
         VRConnector vrConnector;
-        public VRCommands(VRConnector vr) {
+
+        public VRCommands(VRConnector vr)
+        {
             vrConnector = vr;
+
         }
 
         public void HUD(string[] bycicleData, string HUDUuid)
         {
-            dynamic toJsonClear = new
-            {
-                id = "scene/panel/clear",
-                data = new
-                {
-                    id = HUDUuid
+            vrConnector.sendJson(bycicleClear);
 
-                }
-            };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonClear)));
-
+            Thread.Sleep(50);
             string displayText;
             for (int i = 0; i < 8; i++)
             {
@@ -62,29 +59,46 @@ namespace VRconnection
                         displayText = "Error";
                         break;
                 }
-                dynamic toJson = new
+                dynamic toJsonText = new
                 {
                     id = "scene/panel/drawtext",
                     data = new
                     {
                         id = HUDUuid,
                         text = displayText,
-                        position = new[] { 50 * (i / 4) + 150, 100.0 * (i % 4) + 100 },
+                        position = new[] { 150 * (i / 4) + 50, 100.0 * (i % 4) + 150 },
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
-                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonText)));
+            }
 
-                dynamic toJsonSwap = new
+            vrConnector.sendJson(bycicleSwap);
+        }
+
+        public void chat(string[] chat, string chatUuid)
+        {
+
+           
+            vrConnector.sendJson(chatClear);
+
+            for (int i = 0; i < chat.Length; i++)
+            {
+                dynamic toJsonText = new
                 {
-                    id = "scene/panel/swap",
+                    id = "scene/panel/drawtext",
                     data = new
                     {
-                        id = HUDUuid
+                        id = chatUuid,
+                        text = chat[i],
+                        position = new[] { 50, 100.0 * (i % 4) + 50 },
+                        color = new[] { 0, 0, 0, 1 }
                     }
                 };
-                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonSwap)));
+                vrConnector.sendJson(toJsonText);
             }
+
+            vrConnector.sendJson(chatSwap);
         }
 
         public void load(string filename)
@@ -98,8 +112,7 @@ namespace VRconnection
 
                 }
             };
-            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
-            Console.WriteLine(vrConnector.readObject());
+            vrConnector.sendJson(toJson);
         }
 
         public void find(string item)
@@ -127,11 +140,15 @@ namespace VRconnection
 
         public void connectClient(JArray data)
         {
+            string folderpath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            string[] folders = folderpath.Split('\\');
+            string username = folders[folders.Length - 1];
+            Console.WriteLine(folderpath);
             IEnumerator<JToken> enumerator = data.GetEnumerator();
             enumerator.MoveNext();
             for (int i = 0; i < data.Count; i++)
             {
-                if (enumerator.Current.ToObject<JObject>().GetValue("clientinfo").ToObject<JObject>().GetValue("user").ToString() == "patri")
+                if (enumerator.Current.ToObject<JObject>().GetValue("clientinfo").ToObject<JObject>().GetValue("user").ToString() == username)
                 {
                     i = data.Count;
                 }
@@ -158,5 +175,177 @@ namespace VRconnection
             return Json.GetValue("data").ToObject<JArray>();
         }
 
+        public void route()
+        {
+            dynamic toJson = new
+            {
+                id = "route/add",
+                data = new
+                {
+                    nodes = new[] {
+
+                        new {   pos = new[] { 0, 0, 0 },    dir = new[] { -10, 0, 10} },
+                        new {   pos = new[] { 0, 1, 10 },   dir = new[] { 10, 2, 10} },
+                        new {   pos = new[] { 10, 2, 10 },  dir = new[] { 10, 2, -10} },
+                        new {   pos = new[] { 10, 3, 0 },   dir = new[] { -10, 0, -10} },
+                        new {   pos = new[] { 0, 3, 0 },    dir = new[] { -10, 0, 10} },
+                        new {   pos = new[] { -10, 3, 0 },  dir = new[] { -10, 0, -10} },
+                        new {   pos = new[] { -10, 2, -10 }, dir = new[] { 10, -2, -10} },
+                        new {   pos = new[] { 0, 1, -10 },  dir = new[] { 10, -2, 10} }
+                    }
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+
+        public void follow(string routeUuid, string paneUuid)
+        {
+            dynamic toJson = new
+            {
+                id = "route/follow",
+                data = new
+                {
+                    route = routeUuid,
+                    node = paneUuid,
+                    speed = 1.0,
+                    offset = 0.0,
+                    rotate = "XYZ",
+                    followHeight = false,
+                    rotateOffset = new[] { 0, 0, 0 },
+                    positionOffset = new[] { 0, 0, 0 }
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+        public void speed(string speed, string paneUuid)
+        {
+            float newSpeed = float.Parse(speed) / 10;
+            dynamic toJson = new
+            {
+                id = "route/follow/speed",
+                data = new
+                {
+                    node = paneUuid,
+                    speed = newSpeed,
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+        public void createPanel(string panelName)
+        {
+            dynamic toJson = new
+            {
+                id = "scene/node/add",
+                data = new
+                {
+                    name = panelName,
+                    components = new
+                    {
+                        transform = new
+                        {
+                            position = new[] { 5, 1, 0 },
+                            scale = 1,
+                            rotation = new[] { 0, 0, 0 }
+                        },
+                        panel = new
+                        {
+                            size = new[] { 1, 1 },
+                            resolution = new[] { 512, 512 },
+                            background = new[] { 1, 1, 1, 1 }
+                        }
+                    }
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+        public void update(string parent, string child)
+        {
+            dynamic toJson = new
+            {
+                id = "scene/node/update",
+                data = new
+                {
+                    id = child,
+                    parent = parent,
+                    transform = new
+                    {
+                        position = new[] { 0, 1, 0 },
+                        scale = 1.0,
+                        rotation = new[] { 0, 0, 0 },
+                    }
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+        public void setHUDUuid(string huduuid)
+        {
+            HUDUuid = huduuid;
+            dynamic toJson = new
+            {
+                id = "scene/panel/clear",
+                data = new
+                {
+                    id = HUDUuid
+                }
+            };
+            bycicleClear = JObject.Parse(JsonConvert.SerializeObject(toJson));
+            dynamic toJsonSwap = new
+            {
+                id = "scene/panel/swap",
+                data = new
+                {
+                    id = HUDUuid
+                }
+            };
+            bycicleSwap = JObject.Parse(JsonConvert.SerializeObject(toJsonSwap));
+
+        }
+
+        public void setChatUuid(string chatUuid)
+        {
+            this.chatUuid = chatUuid;
+
+            dynamic toJson = new
+            {
+                id = "scene/panel/clear",
+                data = new
+                {
+                    id = chatUuid
+                }
+            };
+            chatClear = JObject.Parse(JsonConvert.SerializeObject(toJson));
+
+            dynamic toJsonSwap = new
+            {
+                id = "scene/panel/swap",
+                data = new
+                {
+                    id = chatUuid
+                }
+            };
+            chatSwap = JObject.Parse(JsonConvert.SerializeObject(toJsonSwap));
+        }
+
+        public void addRoad(string routeUuid)
+        {
+            dynamic toJson = new
+            {
+                id = "scene/road/add",
+                data = new
+                {
+                    route = routeUuid,
+                    diffuse = "data/NetworkEngine/textures/tarmac_diffuse.png",
+                    normal = "data/NetworkEngine/textures/tarmac_normale.png",
+                    specular = "data/NetworkEngine/textures/tarmac_specular.png",
+                    heightoffset = 0.01
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
     }
 }

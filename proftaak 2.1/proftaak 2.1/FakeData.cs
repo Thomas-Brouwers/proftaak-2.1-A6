@@ -21,8 +21,8 @@ namespace proftaak_2._1
         public FakeData()
         {
             requestedPower = rand.Next(1, 80) * 5;
-            Application.Run(new Form1(this));
-            Console.WriteLine("Sending Data");
+            //Application.Run(new Form1(this));
+            //Console.WriteLine("Sending Data");
         }
 
         public string[] update() {

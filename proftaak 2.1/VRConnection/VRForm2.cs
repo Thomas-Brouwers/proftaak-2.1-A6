@@ -106,7 +106,7 @@ namespace VRConnection
             enumerator.MoveNext();
             for (int i = 0; i < data.Count; i++)
             {
-                ConnectCB.Items.Add(enumerator.Current.ToObject<JObject>().GetValue("clientinfo").ToObject<JObject>().GetValue("user").ToString());
+                ConnectCB.Items.Add(enumerator.Current.SelectToken("clientinfo").SelectToken("user").ToString());
                 enumerator.MoveNext();
             }
         }
@@ -138,9 +138,9 @@ namespace VRConnection
                     {
                         case "scene/get": refreshScene(Json); break;
                         case "session/list": refreshConnection(Json); break;
-                        case "tunnel/create": vrConnector.Destination = vrConnector.readObject().GetValue("data").ToObject<JObject>().GetValue("id").ToString(); break;
+                        case "tunnel/create": vrConnector.Destination = vrConnector.readObject().SelectToken("data").SelectToken("id").ToString(); break;
                         case "scene/skybox/settime": break;
-                        case "notReady": break;
+                        case "nothingHere": break;
                         default:  break;
                     }
                 }
@@ -157,7 +157,7 @@ namespace VRConnection
             enumerator.MoveNext();
             for (int i = 0; i < scene.Count; i++)
             {
-                SceneLV.Items.Add(enumerator.Current.ToObject<JObject>().GetValue("name").ToString());
+                SceneLV.Items.Add(enumerator.Current.SelectToken("name").ToString());
                 enumerator.MoveNext();
             }
         }
@@ -165,6 +165,19 @@ namespace VRConnection
         private void VRForm2_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void SaveBT_Click(object sender, EventArgs e)
+        {
+            dynamic toJson = new
+            {
+                id = "scene/save",
+                data = new {
+                    filename = "Brain.json",
+                    overwrite = true
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
         private void refreshConnection(JObject Json)
@@ -175,11 +188,11 @@ namespace VRConnection
             enumerator.MoveNext();
             for (int i = 0; i < data.Count; i++)
             {
-                ConnectCB.Items.Add(enumerator.Current.ToObject<JObject>().GetValue("clientinfo").ToObject<JObject>().GetValue("user").ToString());
+                ConnectCB.Items.Add(enumerator.Current.SelectToken("clientinfo").SelectToken("user").ToString());
                 enumerator.MoveNext();
             }
-
         }
+        
 
 
     }

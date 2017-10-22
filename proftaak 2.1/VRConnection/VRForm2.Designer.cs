@@ -38,6 +38,7 @@
             this.RefreshSceneBT = new System.Windows.Forms.Button();
             this.RefreshConnectionsBT = new System.Windows.Forms.Button();
             this.ItemLB = new System.Windows.Forms.Label();
+            this.SaveBT = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SceneLV
@@ -131,11 +132,22 @@
             this.ItemLB.TabIndex = 10;
             this.ItemLB.Text = "boom shaka laka";
             // 
+            // SaveBT
+            // 
+            this.SaveBT.Location = new System.Drawing.Point(211, 150);
+            this.SaveBT.Name = "SaveBT";
+            this.SaveBT.Size = new System.Drawing.Size(75, 23);
+            this.SaveBT.TabIndex = 11;
+            this.SaveBT.Text = "Save";
+            this.SaveBT.UseVisualStyleBackColor = true;
+            this.SaveBT.Click += new System.EventHandler(this.SaveBT_Click);
+            // 
             // VRForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 427);
+            this.Controls.Add(this.SaveBT);
             this.Controls.Add(this.ItemLB);
             this.Controls.Add(this.RefreshConnectionsBT);
             this.Controls.Add(this.RefreshSceneBT);
@@ -166,5 +178,6 @@
         private System.Windows.Forms.Button RefreshSceneBT;
         private System.Windows.Forms.Button RefreshConnectionsBT;
         private System.Windows.Forms.Label ItemLB;
+        private System.Windows.Forms.Button SaveBT;
     }
 }

@@ -56,3 +56,18 @@ C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\VRConnection\obj
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\VRConnection.csproj.CoreCompileInputs.cache
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\ConsoleApp1.exe
 C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\ConsoleApp1.pdb
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\ConsoleApp1.exe.config
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\ConsoleApp1.exe
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\ConsoleApp1.pdb
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\Newtonsoft.Json.dll
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\proftaak 2.1.dll
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\proftaak 2.1.pdb
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\proftaak 2.1.dll.config
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\bin\Debug\Newtonsoft.Json.xml
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\VRConnection.csprojResolveAssemblyReference.cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\VRconnection.VRForm.resources
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\VRConnection.VRForm2.resources
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\VRConnection.csproj.GenerateResource.Cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\VRConnection.csproj.CoreCompileInputs.cache
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\ConsoleApp1.exe
+D:\SourcTree dingen\Proftaak 2.1\proftaak 2.1\VRConnection\obj\Debug\ConsoleApp1.pdb
