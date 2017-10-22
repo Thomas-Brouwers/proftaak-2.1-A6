@@ -27,6 +27,7 @@ namespace Clientside
 
         public Client()
         {
+            message = new string[4] { " ", " ", " ", " " };
 
             vr = new VRConnector();
             commands = new VRCommands(vr);
@@ -55,12 +56,6 @@ namespace Clientside
             commands.follow(routeUuid, HUDUuid);
             commands.update(HUDUuid, cameraUuid);
             commands.update(HUDUuid, chatUuid);
-
-            
-
-           
-
-            
 
             clientStart();
         }
@@ -108,7 +103,7 @@ namespace Clientside
                 try
                 {
                     JObject Json = vr.readObject();
-                    Console.WriteLine(Json);
+                    //Console.WriteLine(Json);
                     JToken token = Json.SelectToken("data").SelectToken("data");
                     string id = token.SelectToken("id").ToString();
                     switch (id)
@@ -188,8 +183,8 @@ namespace Clientside
                         case "doctor/chat": updateChat(Json.SelectToken("data").SelectToken("data").ToString()); break;
                         //case "doctor/start": clientStart(); break;
                         case "doctor/noodstop": Environment.Exit(0); break;
-                        case "doctor/powerup": increasePower(); break;
-                        case "doctor/powerdown": decreasePower(); break;
+                        case "doctor/powerup": spp.increasePower(); break;
+                        case "doctor/powerdown": spp.decreasePower(); break;
                         default: break;
                     }
                 }
@@ -247,22 +242,11 @@ namespace Clientside
 
         public void updateChat(string newMessage)
         {
-
+            for (int i = 0; i < message.Length - 1; i++) {
+                message[i] = message[i + 1];
+            }
+            message[3] = newMessage;
             commands.chat(message, chatUuid);
-        }
-
-        public void increasePower()
-        {
-
-            Console.WriteLine("increasePower");
-
-        }
-
-        public void decreasePower()
-        {
-
-            Console.WriteLine("decreasepower");
-
         }
     }
 }

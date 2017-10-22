@@ -9,6 +9,7 @@ namespace proftaak_2._1
     {
         private SerialPort serialPort;
         string[] data2;
+        int requestedPower = 25;
 
 
         public SerialPortProgram(String port)
@@ -35,6 +36,18 @@ namespace proftaak_2._1
             Console.WriteLine(data);
             data2 = data.Split('\t');
             return data2;
+        }
+
+        public void increasePower()
+        {
+            if (requestedPower < 400)
+            serialPort.WriteLine("pp " + (requestedPower + 5));
+        }
+
+        public void decreasePower()
+        {
+            if (requestedPower > 25)
+            serialPort.WriteLine("pp " + (requestedPower - 5) );
         }
     }
 }

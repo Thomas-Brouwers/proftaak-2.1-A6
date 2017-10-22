@@ -38,5 +38,18 @@ namespace proftaak_2._1
             data2 = data.Split('\t');
             return data2;
         }
+
+        public void increasePower()
+        {
+            
+            if(requestedPower < 400)
+            requestedPower += 5;
+        }
+
+        public void decreasePower()
+        {
+            if (requestedPower > 25)
+                requestedPower -= 5;
+        }
     }
 }

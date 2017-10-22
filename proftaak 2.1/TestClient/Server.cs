@@ -103,7 +103,7 @@ class Server
     {
         Byte[] bytes = new Byte[256];
         data = null;
-        // Process the data sent by the client.
+        // Process the data sent by the doctor.
         while (true)
         {
                 jsondata = ReadObject(doctorstream);

@@ -78,8 +78,6 @@ namespace VRconnection
 
         public void chat(string[] chat, string chatUuid)
         {
-
-           
             vrConnector.sendJson(chatClear);
 
             for (int i = 0; i < chat.Length; i++)
@@ -95,24 +93,10 @@ namespace VRconnection
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
-                vrConnector.sendJson(toJsonText);
+                vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJsonText)));
             }
 
             vrConnector.sendJson(chatSwap);
-        }
-
-        public void load(string filename)
-        {
-            dynamic toJson = new
-            {
-                id = "scene/load",
-                data = new
-                {
-                    filename = filename
-
-                }
-            };
-            vrConnector.sendJson(toJson);
         }
 
         public void find(string item)
