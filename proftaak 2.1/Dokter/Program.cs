@@ -16,7 +16,7 @@ namespace Dokter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var main = new Form2();
+            var main = new LoginForm();
             main.FormClosed += new FormClosedEventHandler(FormClosed);
             main.Show();
             Application.Run();
@@ -28,5 +28,7 @@ namespace Dokter
             if (Application.OpenForms.Count == 0) Application.ExitThread();
             else Application.OpenForms[0].FormClosed += FormClosed;
         }
+
+
     }
 }

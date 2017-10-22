@@ -9,8 +9,12 @@ using System.Threading;
 
 class Server
 {
-    NetworkStream stream;
+    
+    NetworkStream doctorstream;
+    NetworkStream clientstream;
     string data;
+    bool doctorexists = false;
+    JObject jsondata;
     public static void Main()
     {
         new Server();
@@ -43,14 +47,30 @@ class Server
                 Console.WriteLine("Connected!");
 
                 // Get a stream object for reading and writing
-                stream = client.GetStream();
+                NetworkStream stream = client.GetStream();
 
-                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                jsondata = ReadObject(stream);
 
-                clientThread.Start(client);
+                if (jsondata.GetValue("id").ToString() == "doctor")
+                {
+                    doctorstream = stream;
+                    Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
+
+                    doctorThread.Start(client);
+                    doctorexists = true;
+                }
+                if (jsondata.GetValue("id").ToString() == "client")
+                {
+                    while (!doctorexists) { }
+                    clientstream = stream;
+                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+
+                    clientThread.Start(client);
+
+
+                }
             }
-
-
+            
         }
         catch (SocketException e)
         {
@@ -69,97 +89,71 @@ class Server
 
     private void HandleClientComm(object client)
     {
-        int i;
         Byte[] bytes = new Byte[256];
         data = null;
         // Process the data sent by the client.
-        while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+        while (true)
         {
-            data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-            Console.WriteLine("Received: {0}", data);
+                jsondata = ReadObject(clientstream);
+                Console.WriteLine(jsondata);
+                SendObject(JsonConvert.SerializeObject(jsondata), doctorstream);
+        }
+    }
+    private void HandleDoctorComm(object client)
+    {
+        Byte[] bytes = new Byte[256];
+        data = null;
+        // Process the data sent by the client.
+        while (true)
+        {
+                jsondata = ReadObject(doctorstream);
+                Console.WriteLine(jsondata);
+                SendObject(JsonConvert.SerializeObject(jsondata), clientstream);
+        }
+    }
 
-            //SaveData(JsonConvert.SerializeObject(data));
-
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes($"Received: {data}");
-
-            // Send back a response.
-            stream.Write(msg, 0, msg.Length);
-            Console.WriteLine("Sent: {0}", "Acknowledged");
-
-            if (data == "quit")
+    public JObject ReadObject(NetworkStream stream)
+    {
+        try
+        {
+            byte[] preBuffer = new Byte[4];
+            stream.Read(preBuffer, 0, 4);
+            int lenght = BitConverter.ToInt32(preBuffer, 0);
+            byte[] buffer = new Byte[lenght];
+            int totalReceived = 0;
+            while (totalReceived < lenght)
             {
-                break;
+                int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+                totalReceived += receivedCount;
             }
-            else if (data == "doctor")
-            {
-                Thread doctorThread = new Thread(new ThreadStart(HandleDoctor));
-                doctorThread.Start();
-            }
-            else if (data == "client")
-            {
-                Thread patientThread = new Thread(new ThreadStart(HandleClient));
-                patientThread.Start();
-
-            }
+            Console.WriteLine(Encoding.UTF8.GetString(buffer));
+            JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+            Console.WriteLine(Json);
+            return Json;
         }
-    }
-
-    private void HandleDoctor()
-    {
-
-    }
-
-    private void HandleClient()
-    {
-        SendObject(data);
-        SaveData(data);
-    }
-
-    public JObject ReadObject()
-    {
-        byte[] preBuffer = new Byte[4];
-        stream.Read(preBuffer, 0, 4);
-        int lenght = BitConverter.ToInt32(preBuffer, 0);
-        byte[] buffer = new Byte[lenght];
-        int totalReceived = 0;
-        while (totalReceived < lenght)
+        catch (Exception e)
         {
-            int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
-            totalReceived += receivedCount;
+            Console.WriteLine(e.StackTrace);
+            return null;
         }
-        JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
-        Console.WriteLine(Json);
-        return Json;
     }
-
-    public void SaveData(string message)
+    
+    public void SendObject(string message, NetworkStream stream)
     {
-        using (StreamWriter file = File.CreateText("data.txt"))
+        try
         {
-            JsonSerializer serializer = new JsonSerializer();
-            //serialize object directly into file stream
-            serializer.Serialize(file, message);
-        }
-    }
+            byte[] prefix = BitConverter.GetBytes(message.Length);
+            byte[] request = Encoding.Default.GetBytes(message);
 
-    public dynamic LoadData()
-    {
-        using (StreamReader file = File.OpenText("data.txt"))
+            byte[] buffer = new Byte[prefix.Length + message.Length];
+            prefix.CopyTo(buffer, 0);
+            request.CopyTo(buffer, prefix.Length);
+
+            stream.Write(buffer, 0, buffer.Length);
+        }
+        catch (Exception e)
         {
-            JsonSerializer serializer = new JsonSerializer();
-            return serializer.Deserialize(file, typeof(string));
+            Console.WriteLine(e.StackTrace);
         }
-    }
-
-    public void SendObject(string message)
-    {
-        byte[] prefix = BitConverter.GetBytes(message.Length);
-        byte[] request = Encoding.Default.GetBytes(message);
-
-        byte[] buffer = new Byte[prefix.Length + message.Length];
-        prefix.CopyTo(buffer, 0);
-        request.CopyTo(buffer, prefix.Length);
-
-        stream.Write(buffer, 0, buffer.Length);
     }
 }

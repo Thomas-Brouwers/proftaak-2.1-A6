@@ -44,29 +44,10 @@ namespace Clientside
 
             spp = new FakeData();
 
-            try
-            {
-                TcpClient client = new TcpClient();
-                client.Connect("127.0.0.1", 13000);
-                stream = client.GetStream();
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine("ArgumentNullException: {0}", e);
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
+            
             Thread serverConnection = new Thread(serverReader);
-
-            dynamic toJson = new
-            {
-                id = "client",
-                data = new { }
-            };
-            send(JsonConvert.SerializeObject(toJson));
+            serverConnection.Start();
+            
 
             Thread.Sleep(200);
 
@@ -104,7 +85,17 @@ namespace Clientside
                 dynamic toJson = new
                 {
                     id = "client/data",
-                    data = bycicleData
+                    data = new
+                    {
+                        pulse = bycicleData[0],
+                        rpm = bycicleData[1],
+                        speed = bycicleData[2],
+                        distance = bycicleData[3],
+                        requestedPower = bycicleData[4],
+                        energy = bycicleData[5],
+                        elapsedTime = bycicleData[6],
+                        actualPower = bycicleData[7]
+                    }
                 };
             }
         }
@@ -169,6 +160,13 @@ namespace Clientside
                 client.Connect("127.0.0.1", 13000);
                 stream = client.GetStream();
 
+                dynamic toJson = new
+                {
+                    id = "client",
+                    data = new { }
+                };
+                send(JsonConvert.SerializeObject(toJson));
+
             }
             catch (ArgumentNullException e)
             {
@@ -188,6 +186,10 @@ namespace Clientside
                     switch (id)
                     {
                         case "doctor/chat": updateChat(Json.SelectToken("data").SelectToken("data").ToString()); break;
+                        //case "doctor/start": clientStart(); break;
+                        case "doctor/noodstop": Environment.Exit(0); break;
+                        case "doctor/powerup": increasePower(); break;
+                        case "doctor/powerdown": decreasePower(); break;
                         default: break;
                     }
                 }
@@ -247,6 +249,20 @@ namespace Clientside
         {
 
             commands.chat(message, chatUuid);
+        }
+
+        public void increasePower()
+        {
+
+            Console.WriteLine("increasePower");
+
+        }
+
+        public void decreasePower()
+        {
+
+            Console.WriteLine("decreasepower");
+
         }
     }
 }
