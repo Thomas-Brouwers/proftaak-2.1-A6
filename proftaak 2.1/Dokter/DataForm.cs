@@ -21,8 +21,9 @@ namespace Dokter
         bool started = false;
         string jsonData;
         List<Data> dataList = new List<Data>();
-        public DataForm()
+        public DataForm(NetworkStream networkStream)
         {
+            stream = networkStream;
             Thread connection = new Thread(ConnectionHandler);
             connection.Start();
             InitializeComponent();
@@ -92,50 +93,15 @@ namespace Dokter
 
         public void ConnectionHandler()
         {
-            try
+            while (true)
             {
-                // Create a TcpClient.
-                // Note, for this client to work you need to have a TcpServer 
-                // connected to the same address as specified by the server, port
-                // combination.
-                Int32 port = 13000;
-                TcpClient client = new TcpClient("127.0.0.1", port);
+                JObject Json = readObject(stream);
 
-
-
-                stream = client.GetStream();
-
-                // Send the message to the connected TcpServer. 
-                dynamic toJson = new
+                string id = Json.GetValue("id").ToString();
+                switch (id)
                 {
-                    id = "doctor",
-                    data = new
-                    {
-
-                    }
-                };
-                SendObject(JsonConvert.SerializeObject(toJson), stream);
-                while (true)
-                {
-                    JObject Json = readObject(stream);
-
-                        string id = Json.GetValue("id").ToString();
-                        switch (id)
-                        {
-                            case "client/data":update(Json); break;
-                        }
-                    }
-               
-
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine("ArgumentNullException: {0}", e);
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
+                    case "client/data": update(Json); break;
+                }
             }
         }
 
@@ -195,26 +161,26 @@ namespace Dokter
             SendObject(JsonConvert.SerializeObject(toJson), stream);
         }
 
-        public void creategraph() {
+        //public void creategraph() {
 
-            SpeedChart.Series.Add("speed");
-            SpeedChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            SpeedChart.ChartAreas[0].AxisX.IsMarginVisible = false;
-
-
-            SpeedChart.Invoke(new Action(() =>
-            {
-                SpeedChart.Series["speed"].Points.AddY(item);
-            }));
+        //    SpeedChart.Series.Add("speed");
+        //    SpeedChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+        //    SpeedChart.ChartAreas[0].AxisX.IsMarginVisible = false;
 
 
-            SpeedChart.Invoke(new Action(() =>
-            {
-                foreach () {
-                    SpeedChart.Series["speed"].Points.AddY(item);
-                }
-            }));
-        }
+        //    SpeedChart.Invoke(new Action(() =>
+        //    {
+        //        SpeedChart.Series["speed"].Points.AddY(item);
+        //    }));
+
+
+        //    SpeedChart.Invoke(new Action(() =>
+        //    {
+        //        foreach () {
+        //            SpeedChart.Series["speed"].Points.AddY(item);
+        //        }
+        //    }));
+        //}
 
 
         public void SendObject(string message, NetworkStream stream)
