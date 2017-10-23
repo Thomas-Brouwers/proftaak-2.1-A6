@@ -53,21 +53,40 @@ class Server
 
                 if (jsondata.GetValue("id").ToString() == "doctor")
                 {
-                    doctorstream = stream;
-                    Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
+                    string username = jsondata.SelectToken("data").SelectToken("username").ToString();
+                    string password = jsondata.SelectToken("data").SelectToken("password").ToString();
+                    if (succesvol)
+                    {
+                        dynamic toJson = new
+                        {
+                            id = "login/succes",
+                            data = new { }
+                        };
+                        doctorstream = stream;
+                        Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
+                        doctorThread.Start(client);
+                        doctorexists = true;
+                    }
+                    else {
+                        dynamic toJson = new {
+                            id = "login/failure",
+                            data = new { }
+                        };
+                        SendObject()
+                        stream.Close();
+                    }
 
-                    doctorThread.Start(client);
-                    doctorexists = true;
+                    
                 }
                 if (jsondata.GetValue("id").ToString() == "client")
                 {
                     while (!doctorexists) { }
+                    string username = jsondata.SelectToken("data").SelectToken("username").ToString();
+                    string password = jsondata.SelectToken("data").SelectToken("password").ToString();
                     clientstream = stream;
                     Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
                     clientThread.Start(client);
-
-
                 }
             }
             
@@ -95,7 +114,6 @@ class Server
         while (true)
         {
                 jsondata = ReadObject(clientstream);
-                Console.WriteLine(jsondata);
                 SendObject(JsonConvert.SerializeObject(jsondata), doctorstream);
         }
     }
@@ -107,7 +125,6 @@ class Server
         while (true)
         {
                 jsondata = ReadObject(doctorstream);
-                Console.WriteLine(jsondata);
                 SendObject(JsonConvert.SerializeObject(jsondata), clientstream);
         }
     }

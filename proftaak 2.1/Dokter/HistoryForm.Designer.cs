@@ -33,8 +33,8 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryForm));
-            this.button1 = new System.Windows.Forms.Button();
-            this.HistroyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.OpenFile = new System.Windows.Forms.Button();
+            this.HistoryChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ActualPowerPN = new System.Windows.Forms.Panel();
             this.ActualPowerTextLB = new System.Windows.Forms.Label();
             this.ActualPowerLB = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@
             this.SpeedLB = new System.Windows.Forms.Label();
             this.dataBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.HistroyChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HistoryChart)).BeginInit();
             this.ActualPowerPN.SuspendLayout();
             this.RequestedPowerPN.SuspendLayout();
             this.EnergyPN.SuspendLayout();
@@ -74,37 +74,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // OpenFile
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 39);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Open file";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.OpenFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.OpenFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OpenFile.Location = new System.Drawing.Point(13, 13);
+            this.OpenFile.Name = "OpenFile";
+            this.OpenFile.Size = new System.Drawing.Size(126, 39);
+            this.OpenFile.TabIndex = 0;
+            this.OpenFile.Text = "Open file";
+            this.OpenFile.UseVisualStyleBackColor = false;
+            this.OpenFile.Click += new System.EventHandler(this.OpenFile_Click);
             // 
-            // HistroyChart
+            // HistoryChart
             // 
-            this.HistroyChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.HistroyChart.BorderlineColor = System.Drawing.Color.Black;
-            this.HistroyChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.HistoryChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.HistoryChart.BorderlineColor = System.Drawing.Color.Black;
+            this.HistoryChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             chartArea1.Name = "ChartArea1";
-            this.HistroyChart.ChartAreas.Add(chartArea1);
+            this.HistoryChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.HistroyChart.Legends.Add(legend1);
-            this.HistroyChart.Location = new System.Drawing.Point(13, 166);
-            this.HistroyChart.Name = "HistroyChart";
+            this.HistoryChart.Legends.Add(legend1);
+            this.HistoryChart.Location = new System.Drawing.Point(13, 166);
+            this.HistoryChart.Name = "HistoryChart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Pulse";
-            this.HistroyChart.Series.Add(series1);
-            this.HistroyChart.Size = new System.Drawing.Size(639, 191);
-            this.HistroyChart.TabIndex = 21;
-            this.HistroyChart.Text = "HistroyChart";
+            this.HistoryChart.Series.Add(series1);
+            this.HistoryChart.Size = new System.Drawing.Size(639, 191);
+            this.HistoryChart.TabIndex = 21;
+            this.HistoryChart.Text = "HistoryChart";
             // 
             // ActualPowerPN
             // 
@@ -352,7 +352,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(679, 374);
-            this.Controls.Add(this.HistroyChart);
+            this.Controls.Add(this.HistoryChart);
             this.Controls.Add(this.ActualPowerPN);
             this.Controls.Add(this.RequestedPowerPN);
             this.Controls.Add(this.EnergyPN);
@@ -361,11 +361,11 @@
             this.Controls.Add(this.PulsePN);
             this.Controls.Add(this.DistancePN);
             this.Controls.Add(this.SpeedPN);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.OpenFile);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HistoryForm";
             this.Text = "Overview";
-            ((System.ComponentModel.ISupportInitialize)(this.HistroyChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HistoryChart)).EndInit();
             this.ActualPowerPN.ResumeLayout(false);
             this.ActualPowerPN.PerformLayout();
             this.RequestedPowerPN.ResumeLayout(false);
@@ -390,8 +390,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart HistroyChart;
+        private System.Windows.Forms.Button OpenFile;
+        private System.Windows.Forms.DataVisualization.Charting.Chart HistoryChart;
         private System.Windows.Forms.Panel ActualPowerPN;
         private System.Windows.Forms.Label ActualPowerTextLB;
         private System.Windows.Forms.Label ActualPowerLB;

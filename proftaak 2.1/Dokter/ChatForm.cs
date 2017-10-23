@@ -30,7 +30,7 @@ namespace Dokter
                 id = "doctor/chat",
                 data = new
                 {
-                    data = ChatInputTB.Text
+                    text = ChatInputTB.Text
                 }
             };
             string message = JsonConvert.SerializeObject(toJson);

@@ -142,14 +142,16 @@ namespace Dokter
         private void SessionStopBT_Click(object sender, EventArgs e)
         {
             started = false;
+            saveFileDialog1.Filter = "dat files (*.dat)|*.dat";
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK
+                && saveFileDialog1.FileName.Length > 0)
+                using (Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-            //serialize
-            using (Stream stream = File.Open("data.dat", FileMode.Create))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    bformatter.Serialize(stream, dataList);
+                }
 
-                bformatter.Serialize(stream, dataList);
-            }
 
         }
 
@@ -193,6 +195,28 @@ namespace Dokter
             SendObject(JsonConvert.SerializeObject(toJson), stream);
         }
 
+        public void creategraph() {
+
+            SpeedChart.Series.Add("speed");
+            SpeedChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            SpeedChart.ChartAreas[0].AxisX.IsMarginVisible = false;
+
+
+            SpeedChart.Invoke(new Action(() =>
+            {
+                SpeedChart.Series["speed"].Points.AddY(item);
+            }));
+
+
+            SpeedChart.Invoke(new Action(() =>
+            {
+                foreach () {
+                    SpeedChart.Series["speed"].Points.AddY(item);
+                }
+            }));
+        }
+
+
         public void SendObject(string message, NetworkStream stream)
         {
             byte[] prefix = BitConverter.GetBytes(message.Length);
@@ -221,5 +245,6 @@ namespace Dokter
             totalReceived = 0;
             return Json;
         }
+
     }
 }

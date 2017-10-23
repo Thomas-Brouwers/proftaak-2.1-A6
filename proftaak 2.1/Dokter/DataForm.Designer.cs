@@ -66,6 +66,7 @@
             this.ChatBT = new System.Windows.Forms.Button();
             this.SessionStartBT = new System.Windows.Forms.Button();
             this.SessionStopBT = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SpeedPN.SuspendLayout();
             this.DistancePN.SuspendLayout();
             this.PulsePN.SuspendLayout();
@@ -322,9 +323,11 @@
             this.SpeedChart.Location = new System.Drawing.Point(12, 136);
             this.SpeedChart.Name = "SpeedChart";
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Speed";
             series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
             series2.Name = "RPM";
             this.SpeedChart.Series.Add(series1);
@@ -430,7 +433,7 @@
             this.SessionStopBT.UseVisualStyleBackColor = false;
             this.SessionStopBT.Click += new System.EventHandler(this.SessionStopBT_Click);
             // 
-            // DataScreen
+            // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -451,7 +454,7 @@
             this.Controls.Add(this.DistancePN);
             this.Controls.Add(this.SpeedPN);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DataScreen";
+            this.Name = "DataForm";
             this.Text = "Monitor";
             this.SpeedPN.ResumeLayout(false);
             this.SpeedPN.PerformLayout();
@@ -510,6 +513,7 @@
         private System.Windows.Forms.Button ChatBT;
         private System.Windows.Forms.Button SessionStartBT;
         private System.Windows.Forms.Button SessionStopBT;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

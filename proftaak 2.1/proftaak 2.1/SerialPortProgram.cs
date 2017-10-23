@@ -11,7 +11,6 @@ namespace proftaak_2._1
         string[] data2;
         int requestedPower = 25;
 
-
         public SerialPortProgram(String port)
         {
             serialPort = new SerialPort(port, 9600, Parity.None);
@@ -19,9 +18,8 @@ namespace proftaak_2._1
             Console.WriteLine("Incoming Data");
             serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataRecieved);
             serialPort.Open();
-            //serialPort.WriteLine("rs");
+            serialPort.WriteLine("rs");
             Thread.Sleep(10000);
-            //Application.Run(new Form1(this));
         }
 
         private void serialPort_DataRecieved(object sender, SerialDataReceivedEventArgs e)
@@ -31,23 +29,32 @@ namespace proftaak_2._1
 
         public string[] update()
         {
-            serialPort.WriteLine("st");
-            string data = serialPort.ReadLine();
-            Console.WriteLine(data);
-            data2 = data.Split('\t');
-            return data2;
+                serialPort.WriteLine("st");
+                string data = serialPort.ReadLine();
+                Console.WriteLine(data);
+                data2 = data.Split('\t');
+                return data2;
         }
 
         public void increasePower()
         {
             if (requestedPower < 400)
-            serialPort.WriteLine("pp " + (requestedPower + 5));
+            {
+                int power = requestedPower + 5;
+                
+                serialPort.WriteLine("pw " + power);
+                serialPort.WriteLine("cd");
+            }
         }
 
         public void decreasePower()
         {
             if (requestedPower > 25)
-            serialPort.WriteLine("pp " + (requestedPower - 5) );
+            {
+                int power = requestedPower - 5;
+                serialPort.WriteLine("pw " + power);
+                serialPort.WriteLine("cd");
+            }
         }
     }
 }

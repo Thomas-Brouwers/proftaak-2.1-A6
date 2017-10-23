@@ -66,7 +66,7 @@ namespace VRconnection
                     {
                         id = HUDUuid,
                         text = displayText,
-                        position = new[] { 150 * (i / 4) + 50, 100.0 * (i % 4) + 150 },
+                        position = new[] { 150 * (i / 4) + 50, 100.0 * (i % 4) + 200 },
                         color = new[] { 0, 0, 0, 1 }
                     }
                 };
@@ -205,7 +205,7 @@ namespace VRconnection
 
         public void speed(string speed, string paneUuid)
         {
-            float newSpeed = float.Parse(speed) / 10;
+            float newSpeed = float.Parse(speed) / 25;
             dynamic toJson = new
             {
                 id = "route/follow/speed",
@@ -230,7 +230,7 @@ namespace VRconnection
                     {
                         transform = new
                         {
-                            position = new[] { 5, 1, 0 },
+                            position = new[] { 1, 1, 1 },
                             scale = 1,
                             rotation = new[] { 0, 0, 0 }
                         },
@@ -238,7 +238,7 @@ namespace VRconnection
                         {
                             size = new[] { 1, 1 },
                             resolution = new[] { 512, 512 },
-                            background = new[] { 1, 1, 1, 1 }
+                            background = new[] { 1, 1, 1, 0 }
                         }
                     }
                 }
@@ -327,6 +327,17 @@ namespace VRconnection
                     normal = "data/NetworkEngine/textures/tarmac_normale.png",
                     specular = "data/NetworkEngine/textures/tarmac_specular.png",
                     heightoffset = 0.01
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+        public void noodstop() {
+            dynamic toJson = new
+            {
+                id = "pause",
+                data = new
+                {
                 }
             };
             vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));

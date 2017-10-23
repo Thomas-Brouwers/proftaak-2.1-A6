@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using System.IO.Ports;
 
 namespace Clientside
 {
@@ -15,7 +16,7 @@ namespace Clientside
     class Client
     {
         private static System.Timers.Timer timer;
-        FakeData spp;
+        SerialPortProgram spp;
         VRConnector vr;
         string[] bycicleData;
         VRCommands commands;
@@ -25,8 +26,9 @@ namespace Clientside
         string[] message;
 
 
-        public Client()
+        public Client(NetworkStream stream)
         {
+            this.stream = stream;
             message = new string[4] { " ", " ", " ", " " };
 
             vr = new VRConnector();
@@ -42,13 +44,24 @@ namespace Clientside
             commands.createPanel("hud");
             commands.find("Camera");
             commands.createPanel("chat");
+            string[] ports = SerialPort.GetPortNames();
+            for (int i = 0; i < ports.Length; i++)
+            {
+                try
+                {
+                    spp = new SerialPortProgram(ports[i]);
+                    
+                }
+                catch (Exception e){
+                    Console.WriteLine(e.StackTrace);
+                }
+            }
+            //spp = new FakeData();
 
-            spp = new FakeData();
 
-            
             Thread serverConnection = new Thread(serverReader);
             serverConnection.Start();
-            
+
 
             Thread.Sleep(200);
 
@@ -149,28 +162,7 @@ namespace Clientside
 
         public void serverReader()
         {
-            try
-            {
-                TcpClient client = new TcpClient();
-                client.Connect("127.0.0.1", 13000);
-                stream = client.GetStream();
 
-                dynamic toJson = new
-                {
-                    id = "client",
-                    data = new { }
-                };
-                send(JsonConvert.SerializeObject(toJson));
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine("ArgumentNullException: {0}", e);
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
             while(true){
                 Thread.Sleep(1);
                 try
@@ -180,10 +172,10 @@ namespace Clientside
                     string id = Json.SelectToken("id").ToString();
                     switch (id)
                     {
-                        case "doctor/chat": updateChat(Json.SelectToken("data").SelectToken("data").ToString()); break;
+                        case "doctor/chat": updateChat(Json.SelectToken("data").SelectToken("text").ToString()); break;
                         //case "doctor/start": clientStart(); break;
-                        case "doctor/noodstop": Environment.Exit(0); break;
-                        case "doctor/powerup": spp.increasePower(); break;
+                        case "doctor/noodstop": commands.noodstop(); break;
+                        case "doctor/powerup": spp.increasePower(); Console.WriteLine("powerup"); break;
                         case "doctor/powerdown": spp.decreasePower(); break;
                         default: break;
                     }

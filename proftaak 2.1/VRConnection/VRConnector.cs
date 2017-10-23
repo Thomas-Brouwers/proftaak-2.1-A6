@@ -56,61 +56,75 @@ namespace VRconnection
 
         public void send(string message)
         {
-            byte[] prefix = BitConverter.GetBytes(message.Length);
-            byte[] request = Encoding.Default.GetBytes(message);
+            try
+            {
+                byte[] prefix = BitConverter.GetBytes(message.Length);
+                byte[] request = Encoding.Default.GetBytes(message);
 
-            byte[] buffer = new Byte[prefix.Length + message.Length];
-            prefix.CopyTo(buffer, 0);
-            request.CopyTo(buffer, prefix.Length);
+                byte[] buffer = new Byte[prefix.Length + message.Length];
+                prefix.CopyTo(buffer, 0);
+                request.CopyTo(buffer, prefix.Length);
 
-            stream.Write(buffer, 0, buffer.Length);
+                stream.Write(buffer, 0, buffer.Length);
+            }
+            catch (Exception e)
+            { }
         }
 
         public void sendJson(JObject Json)
         {
-            dynamic toJson = new
+            try
             {
-                id = "tunnel/send",
-                data = new
+                dynamic toJson = new
                 {
-                    dest = destination,
-                    data = Json
-                }
-            };
+                    id = "tunnel/send",
+                    data = new
+                    {
+                        dest = destination,
+                        data = Json
+                    }
+                };
 
-            string message = JsonConvert.SerializeObject(toJson);
+                string message = JsonConvert.SerializeObject(toJson);
 
-            byte[] prefix = BitConverter.GetBytes(message.Length);
-            byte[] request = Encoding.Default.GetBytes(message);
+                byte[] prefix = BitConverter.GetBytes(message.Length);
+                byte[] request = Encoding.Default.GetBytes(message);
 
-            byte[] buffer = new Byte[prefix.Length + message.Length];
-            prefix.CopyTo(buffer, 0);
-            request.CopyTo(buffer, prefix.Length);
+                byte[] buffer = new Byte[prefix.Length + message.Length];
+                prefix.CopyTo(buffer, 0);
+                request.CopyTo(buffer, prefix.Length);
 
-            stream.Write(buffer, 0, buffer.Length);
+                stream.Write(buffer, 0, buffer.Length);
+            }
+            catch(Exception e)
+            { }
         }
 
         public JObject readObject()
         {
-            int totalReceived = 0;
-            byte[] preBuffer = new Byte[4];
-            stream.Read(preBuffer, 0, 4);
-            int lenght = BitConverter.ToInt32(preBuffer, 0);
-            if (lenght != 0)
+            try
             {
-                byte[] buffer = new Byte[lenght];
-                while (totalReceived < lenght)
+                int totalReceived = 0;
+                byte[] preBuffer = new Byte[4];
+                stream.Read(preBuffer, 0, 4);
+                int lenght = BitConverter.ToInt32(preBuffer, 0);
+                if (lenght != 0)
                 {
-                    int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
-                    totalReceived += receivedCount;
+                    byte[] buffer = new Byte[lenght];
+                    while (totalReceived < lenght)
+                    {
+                        int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+                        totalReceived += receivedCount;
+                    }
+                    JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+                    return Json;
                 }
-                JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
-                return Json;
+                else
+                {
+                    return nothingHere;
+                }
             }
-            else
-            {
-                return nothingHere;
-            }
+            catch (Exception e) { return nothingHere; }
         }
 
 
