@@ -23,30 +23,45 @@ namespace Dokter
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (Stream stream = File.Open("data.dat", FileMode.Open))
+            int size = -1;
+            var FD = new System.Windows.Forms.OpenFileDialog();
+            DialogResult result = FD.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
             {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                string file = FD.FileName;
+                try
+                {
+                    using (Stream stream = File.Open(file, FileMode.Open))
+                    {
+                        var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-                dataList = (List<Data>)bformatter.Deserialize(stream);
+                        dataList = (List<Data>)bformatter.Deserialize(stream);
+                    }
+
+                    PulseLB.Text = dataList[0].pulse;
+                    RPMLB.Text = dataList[0].rpm;
+                    SpeedLB.Text = dataList[0].speed;
+                    DistanceLB.Text = dataList[0].distance;
+                    RequestedPowerLB.Text = dataList[0].requestedPower;
+                    EnergyLB.Text = dataList[0].energy;
+                    ElepsedTimeLB.Text = dataList[0].elapsedTime;
+                    ActualPowerLB.Text = dataList[0].actualpower;
+
+
+
+
+                    HistroyChart.DataSource = dataList.ToString();
+                    HistroyChart.Series["Pulse"].XValueMember = "elapsedTime";
+                    HistroyChart.Series["Pulse"].YValueMembers = "pulse";
+                    HistroyChart.DataBind();
+                }
+                catch (IOException)
+                {
+                }
             }
-
-                PulseLB.Text = dataList[0].pulse;
-                RPMLB.Text = dataList[0].rpm;
-                SpeedLB.Text = dataList[0].speed;
-                DistanceLB.Text = dataList[0].distance;
-                RequestedPowerLB.Text = dataList[0].requestedPower;
-                EnergyLB.Text = dataList[0].energy;
-                ElepsedTimeLB.Text = dataList[0].elapsedTime;
-                ActualPowerLB.Text = dataList[0].actualpower;
-
-
-                
-
-                HistroyChart.DataSource = dataList.ToString();
-                HistroyChart.Series["Pulse"].XValueMember = "elapsedTime";
-                HistroyChart.Series["Pulse"].YValueMembers = "pulse";
-                HistroyChart.DataBind();
-            
+            Console.WriteLine(size); // <-- Shows file size in debugging mode.
+            Console.WriteLine(result); // <-- For debugging use.
         }
     }
 }
+

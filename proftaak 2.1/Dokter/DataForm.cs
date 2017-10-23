@@ -142,13 +142,18 @@ namespace Dokter
         private void SessionStopBT_Click(object sender, EventArgs e)
         {
             started = false;
+            saveFileDialog1.Filter = "dat files (*.dat)|*.dat";
 
-            //serialize
-            using (Stream stream = File.Open("data.dat", FileMode.Create))
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK
+                && saveFileDialog1.FileName.Length > 0)
             {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-                bformatter.Serialize(stream, dataList);
+                using (Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                    bformatter.Serialize(stream, dataList);
+                }
             }
 
         }
