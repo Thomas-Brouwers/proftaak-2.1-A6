@@ -1,0 +1,36 @@
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\TestClient.exe.config
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\TestClient.exe
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\TestClient.pdb
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.pdb
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\obj\Debug\TestClient.exe
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\obj\Debug\TestClient.pdb
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.dll
+C:\Users\tmbro\Documents\Avans\jaar 2\proftaak 2.1\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.dll.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\TestClient.exe.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\TestClient.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\TestClient.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.dll
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.dll.config
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\obj\Debug\TestClient.exe
+C:\Users\patri\Desktop\avans\Proftaken\Remote healthcare\proftaak 2.1\TestClient\obj\Debug\TestClient.pdb
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\TestClient.exe.config
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\TestClient.exe
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\TestClient.pdb
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.dll
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.pdb
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\proftaak 2.1.dll.config
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\obj\Debug\TestClient.exe
+C:\Users\patri\Desktop\avans\Proftaken\A6_Remote_Healthcare_2017-10-23\proftaak 2.1\TestClient\obj\Debug\TestClient.pdb
