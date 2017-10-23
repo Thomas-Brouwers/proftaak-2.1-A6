@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataForm));
             this.SpeedLB = new System.Windows.Forms.Label();
             this.SpeedTextLB = new System.Windows.Forms.Label();
@@ -318,20 +315,8 @@
             this.SpeedChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             chartArea1.Name = "ChartArea1";
             this.SpeedChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.SpeedChart.Legends.Add(legend1);
             this.SpeedChart.Location = new System.Drawing.Point(12, 136);
             this.SpeedChart.Name = "SpeedChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Speed";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "RPM";
-            this.SpeedChart.Series.Add(series1);
-            this.SpeedChart.Series.Add(series2);
             this.SpeedChart.Size = new System.Drawing.Size(639, 191);
             this.SpeedChart.TabIndex = 12;
             this.SpeedChart.Text = "chart1";

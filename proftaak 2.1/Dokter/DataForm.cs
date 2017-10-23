@@ -25,6 +25,7 @@ namespace Dokter
         {
             Thread connection = new Thread(ConnectionHandler);
             connection.Start();
+            creategraph();
             InitializeComponent();
         }
 
@@ -84,6 +85,11 @@ namespace Dokter
             EnergyLB.Text,
             ElapsedTimeLB.Text,
             ActualPowerLB.Text));
+
+                SpeedChart.Invoke(new Action(() =>
+                {
+                    SpeedChart.Series["speed"].Points.AddY(SpeedLB.Text);
+                }));
             };
             if (InvokeRequired)
                 this.Invoke(mi);
@@ -200,20 +206,7 @@ namespace Dokter
             SpeedChart.Series.Add("speed");
             SpeedChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             SpeedChart.ChartAreas[0].AxisX.IsMarginVisible = false;
-
-
-            SpeedChart.Invoke(new Action(() =>
-            {
-                SpeedChart.Series["speed"].Points.AddY(item);
-            }));
-
-
-            SpeedChart.Invoke(new Action(() =>
-            {
-                foreach () {
-                    SpeedChart.Series["speed"].Points.AddY(item);
-                }
-            }));
+            
         }
 
 
