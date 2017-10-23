@@ -109,6 +109,7 @@ namespace Dokter
         {
             started = false;
             saveFileDialog1.Filter = "dat files (*.dat)|*.dat";
+
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK
                 && saveFileDialog1.FileName.Length > 0)
                 using (Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
@@ -117,7 +118,6 @@ namespace Dokter
 
                     bformatter.Serialize(stream, dataList);
                 }
-
 
         }
 

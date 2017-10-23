@@ -16,7 +16,7 @@ namespace Clientside
     class Client
     {
         private static System.Timers.Timer timer;
-        SerialPortProgram spp;
+        FakeData spp;
         VRConnector vr;
         string[] bycicleData;
         VRCommands commands;
@@ -44,19 +44,19 @@ namespace Clientside
             commands.createPanel("hud");
             commands.find("Camera");
             commands.createPanel("chat");
-            string[] ports = SerialPort.GetPortNames();
-            for (int i = 0; i < ports.Length; i++)
-            {
-                try
-                {
-                    spp = new SerialPortProgram(ports[i]);
+            //string[] ports = SerialPort.GetPortNames();
+            //for (int i = 0; i < ports.Length; i++)
+            //{
+            //    try
+            //    {
+            //        spp = new SerialPortProgram(ports[i]);
                     
-                }
-                catch (Exception e){
-                    Console.WriteLine(e.StackTrace);
-                }
-            }
-            //spp = new FakeData();
+            //    }
+            //    catch (Exception e){
+            //        Console.WriteLine(e.StackTrace);
+            //    }
+            //}
+            spp = new FakeData();
 
 
             Thread serverConnection = new Thread(serverReader);

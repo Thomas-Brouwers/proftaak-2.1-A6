@@ -83,11 +83,31 @@ class Server
                 }
                 if (jsondata.GetValue("id").ToString() == "client")
                 {
-                    while (!doctorexists) { }
-                    clientstream = stream;
-                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                    if (CheckLogin(username, password))
+                    {
+                        dynamic toJson = new
+                        {
+                            id = "login/succes",
+                            data = new { }
+                        };
+                        SendObject(JsonConvert.SerializeObject(toJson), stream);
+                        while (!doctorexists) { }
+                        clientstream = stream;
+                        Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
-                    clientThread.Start(client);
+                        clientThread.Start(client);
+                    }
+                    else
+                    {
+                        dynamic toJson = new
+                        {
+                            id = "login/failure",
+                            data = new { }
+                        };
+                        SendObject(JsonConvert.SerializeObject(toJson), stream);
+                        stream.Close();
+                    }
+
                 }
             }
 

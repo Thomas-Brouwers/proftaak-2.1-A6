@@ -34,9 +34,9 @@ namespace Dokter
                     using (Stream stream = File.Open(file, FileMode.Open))
                     {
                         var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
                         dataList = (List<Data>)bformatter.Deserialize(stream);
                     }
-
                     PulseLB.Text = dataList[0].pulse;
                     RPMLB.Text = dataList[0].rpm;
                     SpeedLB.Text = dataList[0].speed;
@@ -45,14 +45,11 @@ namespace Dokter
                     EnergyLB.Text = dataList[0].energy;
                     ElepsedTimeLB.Text = dataList[0].elapsedTime;
                     ActualPowerLB.Text = dataList[0].actualpower;
-
-
                     //HistoryChart.DataSource = dataList.ToString();
                     //HistoryChart.Series["Pulse"].XValueMember = "elapsedTime";
                     //HistoryChart.Series["Pulse"].YValueMembers = "pulse";
                     //HistoryChart.DataBind();
 
-                    
                 }
                 catch (IOException)
                 {
