@@ -2,15 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dokter
@@ -27,6 +22,7 @@ namespace Dokter
             Thread connection = new Thread(ConnectionHandler);
             connection.Start();
             InitializeComponent();
+            creategraph();
         }
 
         private void ChatBT_Click(object sender, EventArgs e)
@@ -38,58 +34,44 @@ namespace Dokter
         private void SessionStartBT_Click(object sender, EventArgs e)
         {
             started = true;
-            Console.WriteLine("started");
-            /*dynamic toJson = new
-            {
-                id = "doctor/start",
-                data = new
-                {
-
-                }
-            };
-            string message = JsonConvert.SerializeObject(toJson);
-
-            byte[] prefix = BitConverter.GetBytes(message.Length);
-            byte[] request = Encoding.Default.GetBytes(message);
-
-            byte[] buffer = new Byte[prefix.Length + message.Length];
-            prefix.CopyTo(buffer, 0);
-            request.CopyTo(buffer, prefix.Length);
-
-            stream.Write(buffer, 0, buffer.Length);
-            */
         }
 
 
         private void update(JObject Json)
         {
-            if (started) { 
-            Console.WriteLine("update");
-            MethodInvoker mi = delegate
+            if (started)
             {
-                PulseLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("pulse").ToString();
-                RPMLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("rpm").ToString();
-                SpeedLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("speed").ToString();
-                DistanceLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("distance").ToString();
-                RequestedPowerLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("requestedPower").ToString();
-                EnergyLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("energy").ToString();
-                ElapsedTimeLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("elapsedTime").ToString();
-                ActualPowerLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("actualPower").ToString();
-               
-                
-                dataList.Add(new Data(PulseLB.Text,
-            RPMLB.Text,
-            SpeedLB.Text,
-            DistanceLB.Text,
-            RequestedPowerLB.Text,
-            EnergyLB.Text,
-            ElapsedTimeLB.Text,
-            ActualPowerLB.Text));
-            };
-            if (InvokeRequired)
-                this.Invoke(mi);
+                MethodInvoker mi = delegate
+                {
+                    PulseLB.Text = Json.GetValue("data").SelectToken("pulse").ToString();
+                    RPMLB.Text = Json.GetValue("data").SelectToken("rpm").ToString();
+                    SpeedLB.Text = Json.GetValue("data").SelectToken("speed").ToString();
+                    DistanceLB.Text = Json.GetValue("data").ToObject<JObject>().GetValue("distance").ToString();
+                    RequestedPowerLB.Text = Json.GetValue("data").SelectToken("requestedPower").ToString();
+                    EnergyLB.Text = Json.GetValue("data").SelectToken("energy").ToString();
+                    ElapsedTimeLB.Text = Json.GetValue("data").SelectToken("elapsedTime").ToString();
+                    ActualPowerLB.Text = Json.GetValue("data").SelectToken("actualPower").ToString();
+
+
+
+                    dataList.Add(new Data(PulseLB.Text,
+                RPMLB.Text,
+                SpeedLB.Text,
+                DistanceLB.Text,
+                RequestedPowerLB.Text,
+                EnergyLB.Text,
+                ElapsedTimeLB.Text,
+                ActualPowerLB.Text));
+                    SpeedChart.Invoke(new Action(() =>
+                    {
+                        SpeedChart.Series["speed"].Points.AddY(int.Parse(SpeedLB.Text));
+                    }));
+
+                };
+                if (InvokeRequired)
+                    this.Invoke(mi);
+            }
         }
-    }
 
         public void ConnectionHandler()
         {
@@ -161,26 +143,12 @@ namespace Dokter
             SendObject(JsonConvert.SerializeObject(toJson), stream);
         }
 
-        //public void creategraph() {
-
-        //    SpeedChart.Series.Add("speed");
-        //    SpeedChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-        //    SpeedChart.ChartAreas[0].AxisX.IsMarginVisible = false;
-
-
-        //    SpeedChart.Invoke(new Action(() =>
-        //    {
-        //        SpeedChart.Series["speed"].Points.AddY(item);
-        //    }));
-
-
-        //    SpeedChart.Invoke(new Action(() =>
-        //    {
-        //        foreach () {
-        //            SpeedChart.Series["speed"].Points.AddY(item);
-        //        }
-        //    }));
-        //}
+        public void creategraph()
+        {
+            SpeedChart.Series.Add("speed");
+            SpeedChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            SpeedChart.ChartAreas[0].AxisX.IsMarginVisible = false;
+        }
 
 
         public void SendObject(string message, NetworkStream stream)

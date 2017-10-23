@@ -132,7 +132,7 @@ namespace VRconnection
             enumerator.MoveNext();
             for (int i = 0; i < data.Count; i++)
             {
-                if (enumerator.Current.ToObject<JObject>().GetValue("clientinfo").ToObject<JObject>().GetValue("user").ToString() == username)
+                if (enumerator.Current.SelectToken("clientinfo").SelectToken("user").ToString() == username)
                 {
                     i = data.Count;
                 }
@@ -147,7 +147,7 @@ namespace VRconnection
                 id = "tunnel/create",
                 data = new
                 {
-                    session = enumerator.Current.ToObject<JObject>().GetValue("id").ToString(),
+                    session = enumerator.Current.SelectToken("id").ToString(),
                     key = "brain"
                 }
             };

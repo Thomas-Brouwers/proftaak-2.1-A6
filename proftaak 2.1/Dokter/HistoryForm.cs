@@ -45,10 +45,18 @@ namespace Dokter
                     EnergyLB.Text = dataList[0].energy;
                     ElepsedTimeLB.Text = dataList[0].elapsedTime;
                     ActualPowerLB.Text = dataList[0].actualpower;
-                    //HistoryChart.DataSource = dataList.ToString();
-                    //HistoryChart.Series["Pulse"].XValueMember = "elapsedTime";
-                    //HistoryChart.Series["Pulse"].YValueMembers = "pulse";
-                    //HistoryChart.DataBind();
+
+                    HistoryChart.Series.Add("speed");
+                    HistoryChart.Series["speed"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    HistoryChart.ChartAreas[0].AxisX.IsMarginVisible = false;
+                    HistoryChart.Invoke(new Action(() =>
+                    {
+                        foreach (Data data in dataList)
+                        {
+                            HistoryChart.Series["speed"].Points.AddY(data.speed);
+                        }
+                    }));
+
 
                 }
                 catch (IOException)

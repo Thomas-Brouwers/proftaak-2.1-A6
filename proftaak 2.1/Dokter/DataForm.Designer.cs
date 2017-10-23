@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataForm));
             this.SpeedLB = new System.Windows.Forms.Label();
             this.SpeedTextLB = new System.Windows.Forms.Label();
@@ -67,6 +64,7 @@
             this.SessionStartBT = new System.Windows.Forms.Button();
             this.SessionStopBT = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Clients = new System.Windows.Forms.ComboBox();
             this.SpeedPN.SuspendLayout();
             this.DistancePN.SuspendLayout();
             this.PulsePN.SuspendLayout();
@@ -318,20 +316,8 @@
             this.SpeedChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             chartArea1.Name = "ChartArea1";
             this.SpeedChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.SpeedChart.Legends.Add(legend1);
             this.SpeedChart.Location = new System.Drawing.Point(12, 136);
             this.SpeedChart.Name = "SpeedChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Speed";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "RPM";
-            this.SpeedChart.Series.Add(series1);
-            this.SpeedChart.Series.Add(series2);
             this.SpeedChart.Size = new System.Drawing.Size(639, 191);
             this.SpeedChart.TabIndex = 12;
             this.SpeedChart.Text = "chart1";
@@ -401,7 +387,7 @@
             // 
             this.ChatBT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.ChatBT.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ChatBT.Location = new System.Drawing.Point(12, 5);
+            this.ChatBT.Location = new System.Drawing.Point(255, 5);
             this.ChatBT.Name = "ChatBT";
             this.ChatBT.Size = new System.Drawing.Size(72, 37);
             this.ChatBT.TabIndex = 20;
@@ -413,7 +399,7 @@
             // 
             this.SessionStartBT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.SessionStartBT.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SessionStartBT.Location = new System.Drawing.Point(159, 5);
+            this.SessionStartBT.Location = new System.Drawing.Point(333, 5);
             this.SessionStartBT.Name = "SessionStartBT";
             this.SessionStartBT.Size = new System.Drawing.Size(155, 37);
             this.SessionStartBT.TabIndex = 21;
@@ -425,7 +411,7 @@
             // 
             this.SessionStopBT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.SessionStopBT.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SessionStopBT.Location = new System.Drawing.Point(416, 5);
+            this.SessionStopBT.Location = new System.Drawing.Point(494, 5);
             this.SessionStopBT.Name = "SessionStopBT";
             this.SessionStopBT.Size = new System.Drawing.Size(156, 37);
             this.SessionStopBT.TabIndex = 22;
@@ -433,12 +419,21 @@
             this.SessionStopBT.UseVisualStyleBackColor = false;
             this.SessionStopBT.Click += new System.EventHandler(this.SessionStopBT_Click);
             // 
+            // Clients
+            // 
+            this.Clients.FormattingEnabled = true;
+            this.Clients.Location = new System.Drawing.Point(128, 12);
+            this.Clients.Name = "Clients";
+            this.Clients.Size = new System.Drawing.Size(121, 21);
+            this.Clients.TabIndex = 23;
+            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(658, 529);
+            this.Controls.Add(this.Clients);
             this.Controls.Add(this.SessionStopBT);
             this.Controls.Add(this.SessionStartBT);
             this.Controls.Add(this.ChatBT);
@@ -514,6 +509,7 @@
         private System.Windows.Forms.Button SessionStartBT;
         private System.Windows.Forms.Button SessionStopBT;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ComboBox Clients;
     }
 }
 

@@ -44,13 +44,14 @@ namespace Clientside
             commands.createPanel("hud");
             commands.find("Camera");
             commands.createPanel("chat");
+            commands.addRoad(routeUuid);
             //string[] ports = SerialPort.GetPortNames();
             //for (int i = 0; i < ports.Length; i++)
             //{
             //    try
             //    {
             //        spp = new SerialPortProgram(ports[i]);
-                    
+
             //    }
             //    catch (Exception e){
             //        Console.WriteLine(e.StackTrace);
@@ -63,9 +64,9 @@ namespace Clientside
             serverConnection.Start();
 
 
-            Thread.Sleep(200);
+            Thread.Sleep(400);
 
-            commands.addRoad(routeUuid);
+            
             commands.follow(routeUuid, HUDUuid);
             commands.update(HUDUuid, cameraUuid);
             commands.update(HUDUuid, chatUuid);
@@ -105,6 +106,7 @@ namespace Clientside
                         actualPower = bycicleData[7]
                     }
                 };
+                send(JsonConvert.SerializeObject(toJson));
             }
         }
 

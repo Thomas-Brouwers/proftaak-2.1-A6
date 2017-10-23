@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryForm));
             this.OpenFile = new System.Windows.Forms.Button();
             this.HistoryChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -93,15 +91,8 @@
             this.HistoryChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             chartArea1.Name = "ChartArea1";
             this.HistoryChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.HistoryChart.Legends.Add(legend1);
             this.HistoryChart.Location = new System.Drawing.Point(13, 166);
             this.HistoryChart.Name = "HistoryChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Pulse";
-            this.HistoryChart.Series.Add(series1);
             this.HistoryChart.Size = new System.Drawing.Size(639, 191);
             this.HistoryChart.TabIndex = 21;
             this.HistoryChart.Text = "HistoryChart";
