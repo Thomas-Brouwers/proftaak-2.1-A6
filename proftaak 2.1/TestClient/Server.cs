@@ -11,7 +11,8 @@ class Server
 {
 
     NetworkStream doctorstream;
-    NetworkStream clientstream;
+    NetworkStream[] clientstreams;
+    string[] clients;
     string data;
     bool doctorexists = false;
     JObject jsondata;
@@ -23,7 +24,10 @@ class Server
 
     public Server()
     {
+        int count = 0;
         TcpListener server = null;
+        clientstreams = new NetworkStream[10];
+        clients = new string[10];
         try
         {
             // Set the TcpListener on port 13000.
@@ -83,7 +87,7 @@ class Server
                 }
                 if (jsondata.GetValue("id").ToString() == "client")
                 {
-                    if (CheckLogin(username, password, "Client.txt"))
+                    if (CheckLogin(username, password, "Clients.txt"))
                     {
                         dynamic toJson = new
                         {
@@ -92,10 +96,20 @@ class Server
                         };
                         SendObject(JsonConvert.SerializeObject(toJson), stream);
                         while (!doctorexists) { }
-                        clientstream = stream;
+                        clientstreams[count] = stream;
+                        clients[count] = username;
+                        count++;
                         Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
-
                         clientThread.Start(client);
+
+                        dynamic updateJson = new
+                        {
+                            id = "doctor/clients",
+                            data = new {
+                                clients = clients
+                            }
+                        };
+                        SendObject(JsonConvert.SerializeObject(updateJson), doctorstream);
                     }
                     else
                     {
@@ -131,10 +145,11 @@ class Server
     {
         Byte[] bytes = new Byte[256];
         data = null;
+        TcpClient tcpClient = (TcpClient)client;
         // Process the data sent by the client.
         while (true)
         {
-            jsondata = ReadObject(clientstream);
+            jsondata = ReadObject(tcpClient.GetStream());
             SendObject(JsonConvert.SerializeObject(jsondata), doctorstream);
         }
     }
@@ -146,7 +161,27 @@ class Server
         while (true)
         {
             jsondata = ReadObject(doctorstream);
-            SendObject(JsonConvert.SerializeObject(jsondata), clientstream);
+            string user = jsondata.SelectToken("dest").ToString();
+            int dest = 0;
+            if (user == "broadcast")
+            {
+                for (int i = 0; i < clients.Length; i++)
+                {
+                    SendObject(JsonConvert.SerializeObject(jsondata), clientstreams[i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < clients.Length; i++)
+                {
+                    if (clients[i] == user)
+                    {
+                        SendObject(JsonConvert.SerializeObject(jsondata), clientstreams[i]);
+                        i = clients.Length;
+                    }
+                }
+            }
+            
         }
     }
 

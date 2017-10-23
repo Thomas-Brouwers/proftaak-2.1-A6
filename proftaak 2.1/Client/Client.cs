@@ -4,11 +4,9 @@ using VRconnection;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
-using System.IO.Ports;
 
 namespace Clientside
 {
@@ -20,7 +18,7 @@ namespace Clientside
         VRConnector vr;
         string[] bycicleData;
         VRCommands commands;
-        string HUDUuid, chatUuid, routeUuid, cameraUuid;
+        string HUDUuid, chatUuid, routeUuid, cameraUuid, bikeUuid;
         JArray sessionList;
         NetworkStream stream;
         string[] message;
@@ -41,10 +39,10 @@ namespace Clientside
             Thread readerThread = new Thread(reading);
             readerThread.Start();
             commands.route();
+            commands.bike();
             commands.createPanel("hud");
             commands.find("Camera");
             commands.createPanel("chat");
-            commands.addRoad(routeUuid);
             //string[] ports = SerialPort.GetPortNames();
             //for (int i = 0; i < ports.Length; i++)
             //{
@@ -67,9 +65,14 @@ namespace Clientside
             Thread.Sleep(400);
 
             
-            commands.follow(routeUuid, HUDUuid);
-            commands.update(HUDUuid, cameraUuid);
-            commands.update(HUDUuid, chatUuid);
+            commands.addRoad(routeUuid);
+            commands.follow(routeUuid, bikeUuid);
+            float[] offset = new float[3] { -1, 1, 0 };
+            commands.update(bikeUuid, HUDUuid, offset);
+            offset = new float[3] { 0, 1, -1 };
+            commands.update(bikeUuid, cameraUuid, offset);
+            offset = new float[3] { 1, 1, 0 };
+            commands.update(bikeUuid, chatUuid, offset);
 
             clientStart();
         }
@@ -146,6 +149,7 @@ namespace Clientside
             {
                 case "hud": HUDUuid = node.SelectToken("uuid").ToString(); commands.setHUDUuid(HUDUuid); break;
                 case "chat": chatUuid = node.SelectToken("uuid").ToString(); commands.setChatUuid(chatUuid); break;
+                case "bike": bikeUuid = node.SelectToken("uuid").ToString(); break;
                 default: break;
             }
         }

@@ -15,12 +15,11 @@ namespace VRconnection
         TcpClient client;
         Stream stream;
         JObject nothingHere;
-      
-        byte[] buffer;
 
         static void Main(string[] args)
         {
             new VRConnector();
+          //  Application.Run(new VRForm2(new VRConnector()));
         }
 
         public VRConnector()

@@ -12,6 +12,7 @@ namespace Dokter
 {
     public partial class DataForm : Form
     {
+        int destination;
         NetworkStream stream;
         bool started = false;
         string jsonData;
@@ -123,7 +124,7 @@ namespace Dokter
             dynamic toJson = new
             {
                 id = "doctor/noodstop",
-                dest = ClientsCB.SelectedItem,
+                dest = ClientsCB.SelectedIndex,
                 data = new
                  {
 
@@ -137,7 +138,7 @@ namespace Dokter
             dynamic toJson = new
             {
                 id = "doctor/powerup",
-                dest = ClientsCB.SelectedItem,
+                dest = ClientsCB.SelectedIndex,
                 data = new
                  {
 
@@ -151,7 +152,7 @@ namespace Dokter
             dynamic toJson = new
             {
                 id = "doctor/powerdown",
-                dest = ClientsCB.SelectedItem,
+                dest = ClientsCB.SelectedIndex,
                  data = new
                  {
 
@@ -196,6 +197,5 @@ namespace Dokter
             totalReceived = 0;
             return Json;
         }
-
     }
 }

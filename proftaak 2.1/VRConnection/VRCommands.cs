@@ -246,7 +246,7 @@ namespace VRconnection
             vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
         }
 
-        public void update(string parent, string child)
+        public void update(string parent, string child, float[]offset)
         {
             dynamic toJson = new
             {
@@ -257,7 +257,7 @@ namespace VRconnection
                     parent = parent,
                     transform = new
                     {
-                        position = new[] { 0, 1, 0 },
+                        position = offset,
                         scale = 1.0,
                         rotation = new[] { 0, 0, 0 },
                     }
@@ -338,6 +338,33 @@ namespace VRconnection
                 id = "pause",
                 data = new
                 {
+                }
+            };
+            vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
+        }
+
+        public void bike() {
+            dynamic toJson = new
+            {
+                id = "scene/node/add",
+                data = new
+                {
+                    name = "bike",
+                    components = new
+                    {
+                        transform = new
+                        {
+                            position = new[] { 0, 0, 0 },
+                            scale = 1,
+                            rotation = new[] { 0, 0, 0 }
+                        },
+                        model = new
+                        {
+                            file = "C:/Users/patri/Downloads/NetworkEngine.17.09.25.1/NetworkEngine/data/NetworkEngine/models/bike.obj",
+                            cullbackfaces = false,
+                            animated = false,
+                        },
+                    }
                 }
             };
             vrConnector.sendJson(JObject.Parse(JsonConvert.SerializeObject(toJson)));
