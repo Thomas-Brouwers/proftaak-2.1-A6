@@ -73,16 +73,30 @@ namespace Dokter
             }
         }
 
+        public void updateClients(JObject Json) {
+            JArray data = Json.SelectToken("data").SelectToken("clients").ToObject<JArray>();
+            IEnumerator<JToken> enumerator = data.GetEnumerator();
+            enumerator.MoveNext();
+            for (int i = 0; i < data.Count; i++)
+            {
+                ClientsCB.Items.Add(enumerator.Current);
+                enumerator.MoveNext();
+            }
+        }
+
         public void ConnectionHandler()
         {
             while (true)
             {
                 JObject Json = readObject(stream);
-
-                string id = Json.GetValue("id").ToString();
-                switch (id)
+                if (Json.GetValue("dest") == ClientsCB.SelectedItem)
                 {
-                    case "client/data": update(Json); break;
+                    string id = Json.GetValue("id").ToString();
+                    switch (id)
+                    {
+                        case "client/data": update(Json); break;
+                        case "doctor/clients": updateClients(Json); break;
+                    }
                 }
             }
         }
@@ -109,7 +123,8 @@ namespace Dokter
             dynamic toJson = new
             {
                 id = "doctor/noodstop",
-                 data = new
+                dest = ClientsCB.SelectedItem,
+                data = new
                  {
 
                  }
@@ -122,7 +137,8 @@ namespace Dokter
             dynamic toJson = new
             {
                 id = "doctor/powerup",
-                 data = new
+                dest = ClientsCB.SelectedItem,
+                data = new
                  {
 
                  }
@@ -135,6 +151,7 @@ namespace Dokter
             dynamic toJson = new
             {
                 id = "doctor/powerdown",
+                dest = ClientsCB.SelectedItem,
                  data = new
                  {
 

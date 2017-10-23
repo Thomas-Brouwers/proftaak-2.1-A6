@@ -60,7 +60,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Accounts.txt" />
+    <Content Include="Doctors.txt" />
+    <Content Include="Clients.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

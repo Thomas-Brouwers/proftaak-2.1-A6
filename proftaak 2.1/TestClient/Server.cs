@@ -55,7 +55,7 @@ class Server
                 string password = jsondata.SelectToken("data").SelectToken("password").ToString();
                 if (jsondata.GetValue("id").ToString() == "doctor/login")
                 {
-                    if (CheckLogin(username, password))
+                    if (CheckLogin(username, password, "Doctors.txt"))
                     {
                         dynamic toJson = new
                         {
@@ -83,7 +83,7 @@ class Server
                 }
                 if (jsondata.GetValue("id").ToString() == "client")
                 {
-                    if (CheckLogin(username, password))
+                    if (CheckLogin(username, password, "Client.txt"))
                     {
                         dynamic toJson = new
                         {
@@ -186,21 +186,18 @@ class Server
         }
     }
 
-    public bool CheckLogin(string username, string password)
+    public bool CheckLogin(string username, string password, string fileName)
     {
-        // string filepath = Environment.GetFolderPath(Environment.SpecialFolder.);
-        
 
-        string fileName = "Accounts.txt";
         string directoryPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
         string directory = Directory.GetParent(Directory.GetParent(directoryPath).ToString()).ToString();
         string filePath = Path.Combine(directory, fileName);
         try
         {
             string file = File.ReadAllText(filePath);
-            bool containsUser = file.Contains(username);
-            bool containsPassword = file.Contains(password);
-            if (containsUser && containsPassword)
+            bool containsUser = file.Contains(username + " + " + password);
+            //bool containsPassword = file.Contains(password);
+            if (containsUser)
             {
                 return true;
             }

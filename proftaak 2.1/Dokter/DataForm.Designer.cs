@@ -64,7 +64,7 @@
             this.SessionStartBT = new System.Windows.Forms.Button();
             this.SessionStopBT = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.Clients = new System.Windows.Forms.ComboBox();
+            this.ClientsCB = new System.Windows.Forms.ComboBox();
             this.SpeedPN.SuspendLayout();
             this.DistancePN.SuspendLayout();
             this.PulsePN.SuspendLayout();
@@ -419,13 +419,13 @@
             this.SessionStopBT.UseVisualStyleBackColor = false;
             this.SessionStopBT.Click += new System.EventHandler(this.SessionStopBT_Click);
             // 
-            // Clients
+            // ClientsCB
             // 
-            this.Clients.FormattingEnabled = true;
-            this.Clients.Location = new System.Drawing.Point(128, 12);
-            this.Clients.Name = "Clients";
-            this.Clients.Size = new System.Drawing.Size(121, 21);
-            this.Clients.TabIndex = 23;
+            this.ClientsCB.FormattingEnabled = true;
+            this.ClientsCB.Location = new System.Drawing.Point(128, 12);
+            this.ClientsCB.Name = "ClientsCB";
+            this.ClientsCB.Size = new System.Drawing.Size(121, 21);
+            this.ClientsCB.TabIndex = 23;
             // 
             // DataForm
             // 
@@ -433,7 +433,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(658, 529);
-            this.Controls.Add(this.Clients);
+            this.Controls.Add(this.ClientsCB);
             this.Controls.Add(this.SessionStopBT);
             this.Controls.Add(this.SessionStartBT);
             this.Controls.Add(this.ChatBT);
@@ -509,7 +509,7 @@
         private System.Windows.Forms.Button SessionStartBT;
         private System.Windows.Forms.Button SessionStopBT;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.ComboBox Clients;
+        private System.Windows.Forms.ComboBox ClientsCB;
     }
 }
 
