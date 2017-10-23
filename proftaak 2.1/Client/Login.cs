@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Clientside
@@ -26,6 +21,28 @@ namespace Clientside
             InitializeComponent();
         }
 
+        public JObject readObject()
+        {
+            try
+            {
+                int totalReceived = 0;
+                byte[] preBuffer = new Byte[4];
+                stream.Read(preBuffer, 0, 4);
+                int lenght = BitConverter.ToInt32(preBuffer, 0);
+                byte[] buffer = new Byte[lenght];
+                while (totalReceived < lenght)
+                {
+                    int receivedCount = stream.Read(buffer, totalReceived, lenght - totalReceived);
+                    totalReceived += receivedCount;
+                }
+                JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
+                return Json;
+
+            }
+            catch (Exception e) { return null; }
+
+        }
+
         private void LoginBT_Click(object sender, EventArgs e)
         {
             try
@@ -34,10 +51,12 @@ namespace Clientside
                 client.Connect("127.0.0.1", 13000);
                 stream = client.GetStream();
 
+
                 dynamic toJson = new
                 {
                     id = "client",
-                    data = new {
+                    data = new
+                    {
                         username = UserTB.Text,
                         password = PasswordTB.Text
                     }
@@ -53,6 +72,7 @@ namespace Clientside
 
                 stream.Write(buffer, 0, buffer.Length);
 
+
             }
             catch (ArgumentNullException ex)
             {
@@ -62,7 +82,18 @@ namespace Clientside
             {
                 Console.WriteLine("SocketException: {0}", ex);
             }
+
+            JObject Json = readObject();
+            Console.WriteLine(Json);
+            if (Json.SelectToken("id").ToString() == "login/succes")
+            {
                 new Client(stream);
+            }
+            else
+            {
+                MessageBox.Show("verkeerde username of wachtwoord ingevoerd");
+            }
         }
     }
+
 }

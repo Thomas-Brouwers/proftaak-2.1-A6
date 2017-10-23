@@ -9,12 +9,13 @@ using System.Threading;
 
 class Server
 {
-    
+
     NetworkStream doctorstream;
     NetworkStream clientstream;
     string data;
     bool doctorexists = false;
     JObject jsondata;
+
     public static void Main()
     {
         new Server();
@@ -50,46 +51,46 @@ class Server
                 NetworkStream stream = client.GetStream();
 
                 jsondata = ReadObject(stream);
-
-                if (jsondata.GetValue("id").ToString() == "doctor")
+                string username = jsondata.SelectToken("data").SelectToken("username").ToString();
+                string password = jsondata.SelectToken("data").SelectToken("password").ToString();
+                if (jsondata.GetValue("id").ToString() == "doctor/login")
                 {
-                    string username = jsondata.SelectToken("data").SelectToken("username").ToString();
-                    string password = jsondata.SelectToken("data").SelectToken("password").ToString();
-                    if (succesvol)
+                    if (CheckLogin(username, password))
                     {
                         dynamic toJson = new
                         {
                             id = "login/succes",
                             data = new { }
                         };
+                        SendObject(JsonConvert.SerializeObject(toJson), stream);
                         doctorstream = stream;
                         Thread doctorThread = new Thread(new ParameterizedThreadStart(HandleDoctorComm));
                         doctorThread.Start(client);
                         doctorexists = true;
                     }
-                    else {
-                        dynamic toJson = new {
+                    else
+                    {
+                        dynamic toJson = new
+                        {
                             id = "login/failure",
                             data = new { }
                         };
-                        SendObject()
+                        SendObject(JsonConvert.SerializeObject(toJson), stream);
                         stream.Close();
                     }
 
-                    
+
                 }
                 if (jsondata.GetValue("id").ToString() == "client")
                 {
                     while (!doctorexists) { }
-                    string username = jsondata.SelectToken("data").SelectToken("username").ToString();
-                    string password = jsondata.SelectToken("data").SelectToken("password").ToString();
                     clientstream = stream;
                     Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
 
                     clientThread.Start(client);
                 }
             }
-            
+
         }
         catch (SocketException e)
         {
@@ -113,8 +114,8 @@ class Server
         // Process the data sent by the client.
         while (true)
         {
-                jsondata = ReadObject(clientstream);
-                SendObject(JsonConvert.SerializeObject(jsondata), doctorstream);
+            jsondata = ReadObject(clientstream);
+            SendObject(JsonConvert.SerializeObject(jsondata), doctorstream);
         }
     }
     private void HandleDoctorComm(object client)
@@ -124,15 +125,13 @@ class Server
         // Process the data sent by the doctor.
         while (true)
         {
-                jsondata = ReadObject(doctorstream);
-                SendObject(JsonConvert.SerializeObject(jsondata), clientstream);
+            jsondata = ReadObject(doctorstream);
+            SendObject(JsonConvert.SerializeObject(jsondata), clientstream);
         }
     }
 
     public JObject ReadObject(NetworkStream stream)
     {
-        try
-        {
             byte[] preBuffer = new Byte[4];
             stream.Read(preBuffer, 0, 4);
             int lenght = BitConverter.ToInt32(preBuffer, 0);
@@ -145,16 +144,9 @@ class Server
             }
             Console.WriteLine(Encoding.UTF8.GetString(buffer));
             JObject Json = JObject.Parse(Encoding.UTF8.GetString(buffer));
-            Console.WriteLine(Json);
             return Json;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.StackTrace);
-            return null;
-        }
     }
-    
+
     public void SendObject(string message, NetworkStream stream)
     {
         try
@@ -171,6 +163,35 @@ class Server
         catch (Exception e)
         {
             Console.WriteLine(e.StackTrace);
+        }
+    }
+
+    public bool CheckLogin(string username, string password)
+    {
+        // string filepath = Environment.GetFolderPath(Environment.SpecialFolder.);
+        
+
+        string fileName = "Accounts.txt";
+        string directoryPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+        string directory = Directory.GetParent(Directory.GetParent(directoryPath).ToString()).ToString();
+        string filePath = Path.Combine(directory, fileName);
+        try
+        {
+            string file = File.ReadAllText(filePath);
+            bool containsUser = file.Contains(username);
+            bool containsPassword = file.Contains(password);
+            if (containsUser && containsPassword)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception e) {
+            Console.WriteLine(e.StackTrace);
+            return false;
         }
     }
 }
